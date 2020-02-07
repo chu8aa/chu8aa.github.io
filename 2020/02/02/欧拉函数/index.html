@@ -15,7 +15,7 @@
 <meta property="og:description" content="欧拉函数  1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 $ \Phi(N) $。 若在算数基本定理中，$N&#x3D;p^{a1}_1p^{a2}_2…p^{am}_m $，则： $ \Phi(N)&#x3D; N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} $ 即 $\Phi(N)&#x3D; N∗ (1 -\frac {1}{">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-02T13:00:07.000Z">
-<meta property="article:modified_time" content="2020-02-03T09:36:00.701Z">
+<meta property="article:modified_time" content="2020-02-07T11:58:46.559Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -101,54 +101,51 @@
 </li>
 <li><p>质数 $x$ 的欧拉函数 为 $x - 1$</p>
 </li>
-<li><p>$prime[j] * i$  </p>
-</li>
-</ul>
+<li><p>$prime[j] * i$ </p>
 <ul>
 <li>$== 0$ <ul>
 <li>$i % prime[j] == 0$ 说明 $prime[j]$ 是$ i $ 的一个 质因子 </li>
-<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 <li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li>$ != 0 $ <ul>
-<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 <li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k}) * (1 - \frac{1}{prime[j]})$</li>
 </ul>
 </li>
 </ul>
-<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$<br>a ^{\Phi(n)} \equiv 1 (\mod n)<br>$</p>
+</li>
+</ul>
+<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$a ^{\Phi(n)} \equiv 1 (\mod n)$</p>
 <p>a  与  n 互质 ( $ gcd(a , n ) = 1 $)</p>
-<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$<br>x =\{ x_1 ,x_2 … x_{\Phi(n)} \}<br>$</p>
-<p>$<br>m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)}\}<br>$</p>
+<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$x =\{ x_1 ,x_2 … x_{\Phi(n)} \}$<br>$m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)} \}$</p>
 <ol>
 <li>m集合中任意两个数 不模 n 同余 （两数%n不相等<ul>
-<li>反证法 假设存在$ m_a , m_b $ 模 n 同与</li>
+<li>反证法 假设存在$ m_a , m_b $ 模 n 同余</li>
 <li>即$m_a \equiv m_b$</li>
-<li>$ m_a - m_b = n * k $</li>
-<li>$ a <em> x_a - a </em> x_b = n * k $</li>
-<li>$ a <em> (x_a - x_b) = n </em> k $</li>
+<li>$m_a - m_b = n *k$</li>
+<li>$a <em> x_a - a </em>x_b=n*k$</li>
+<li>$a <em> (x_a - x_b) = n </em> k$</li>
 <li>$ a $ 与 $ n $ 互质 </li>
-<li>但是 $ x_k &lt; n , x_a - x_b &lt; n $</li>
+<li>但是 $x_k &lt; n , x_a - x_b &lt; n$</li>
 <li>所以假设不成立</li>
 </ul>
 </li>
 <li>m 中的数 % n 全部与 n 互质<ul>
 <li>$m_i = a *a_i$ </li>
 <li>$a$ 与$n$ 互质 $x_i$与$n$互质 使用$ m_i$ $与 n $互质</li>
-<li>$ gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n % m_i)$</li>
+<li>$gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n \mod m_i)$</li>
 </ul>
 </li>
-<li>使用 m%n 与 x % n 是一组数  $ m_i\mod n = x_j \mod n $</li>
+<li>使用 m%n 与 x % n 是一组数  $m_i\mod n = x_j \mod n$</li>
 </ol>
 <p>当 n 为 质数的时候 费马小定理<br>$<br>a^{p-1} \equiv 1 (\mod p)<br>$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck662g3w600069sdp82edgrtz" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck6c49ou30007g2dpf07n6bdu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>

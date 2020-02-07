@@ -91,21 +91,20 @@
 <p>并且 <script type="math/tex">gcd(a,b)</script> 是 <script type="math/tex">a</script> ,  <script type="math/tex">b</script>  能凑出的最小正整数</p>
 </blockquote>
 <h5 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b);</span><br><span class="line">    <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t - (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h6 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h6><p>$x <em> a + y </em> b = gcd(a,b) = a$  此时$b = 0 , gcd(a,b) = a$</p>
+<h6 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h6><p>当$x <em> a + y </em> b = gcd(a,b) = a $  此时 $b = 0 , gcd(a,b) = a$</p>
 <p>所以$x = 1 , y = 0 ，x = 1$是一定 $y=0$ 是规定 </p>
 <h6 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h6><p>$x_1 <em> a + y_1 </em>b = x_2 <em> b + y_2 </em> (a \mod b)$</p>
-<p>$a \mod b = a - \lfloor {\frac ab} \rfloor  $</p>
-<p>$x_1 <em> a  + y_1 </em> b = x_2 <em> b + y_2 </em>(a - \lfloor{\frac a b}\rfloor) <em> b = y_2 </em> a + (x_2 -\lfloor{\frac ab}\rfloor <em> y_2) </em> b$</p>
+<p>$ a \mod b = a - \lfloor {\frac ab} \rfloor $</p>
+<p>$ x_1 <em> a  + y_1 </em> b = x_2 <em> b + y_2 </em>(a - \lfloor{\frac a b}\rfloor) <em> b = y_2 </em> a + (x_2 -\lfloor{\frac ab}\rfloor <em> y_2) </em> b $</p>
 <p>$x_2,y_2$是上一层递归求的 $x_1,y_1$是这一层要求的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int t &#x3D; x;</span><br><span class="line">x &#x3D; y;</span><br><span class="line">y &#x3D; t - (a&#x2F;b) * x;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> t = x;</span><br><span class="line">x = y;</span><br><span class="line">y = t - (a/b) * x;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b, y, x);</span><br><span class="line">    y -= (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>$x_2 = y ,y_2 = x$</p>
-<p>$x <em> a + y </em> b = x <em> a + (y - \lfloor{\frac ab}\rfloor </em> x) * b$</p>
-
+<script type="math/tex; mode=display">x * a + y * b = x * a + (y - \lfloor{\frac ab}\rfloor * x) * b</script>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck662g3w200029sdp8d3h7x5d" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck6c49ou20006g2dpdqgt7iwo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -169,7 +168,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck662g3w100019sdp7ail23d0" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6c49otz0003g2dp4x4obg0o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -219,54 +218,51 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 </li>
 <li><p>质数 $x$ 的欧拉函数 为 $x - 1$</p>
 </li>
-<li><p>$prime[j] * i$  </p>
-</li>
-</ul>
+<li><p>$prime[j] * i$ </p>
 <ul>
 <li>$== 0$ <ul>
 <li>$i % prime[j] == 0$ 说明 $prime[j]$ 是$ i $ 的一个 质因子 </li>
-<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 <li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li>$ != 0 $ <ul>
-<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
 <li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k}) * (1 - \frac{1}{prime[j]})$</li>
 </ul>
 </li>
 </ul>
-<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$<br>a ^{\Phi(n)} \equiv 1 (\mod n)<br>$</p>
+</li>
+</ul>
+<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$a ^{\Phi(n)} \equiv 1 (\mod n)$</p>
 <p>a  与  n 互质 ( $ gcd(a , n ) = 1 $)</p>
-<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$<br>x =\{ x_1 ,x_2 … x_{\Phi(n)} \}<br>$</p>
-<p>$<br>m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)}\}<br>$</p>
+<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$x =\{ x_1 ,x_2 … x_{\Phi(n)} \}$<br>$m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)} \}$</p>
 <ol>
 <li>m集合中任意两个数 不模 n 同余 （两数%n不相等<ul>
-<li>反证法 假设存在$ m_a , m_b $ 模 n 同与</li>
+<li>反证法 假设存在$ m_a , m_b $ 模 n 同余</li>
 <li>即$m_a \equiv m_b$</li>
-<li>$ m_a - m_b = n * k $</li>
-<li>$ a <em> x_a - a </em> x_b = n * k $</li>
-<li>$ a <em> (x_a - x_b) = n </em> k $</li>
+<li>$m_a - m_b = n *k$</li>
+<li>$a <em> x_a - a </em>x_b=n*k$</li>
+<li>$a <em> (x_a - x_b) = n </em> k$</li>
 <li>$ a $ 与 $ n $ 互质 </li>
-<li>但是 $ x_k &lt; n , x_a - x_b &lt; n $</li>
+<li>但是 $x_k &lt; n , x_a - x_b &lt; n$</li>
 <li>所以假设不成立</li>
 </ul>
 </li>
 <li>m 中的数 % n 全部与 n 互质<ul>
 <li>$m_i = a *a_i$ </li>
 <li>$a$ 与$n$ 互质 $x_i$与$n$互质 使用$ m_i$ $与 n $互质</li>
-<li>$ gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n % m_i)$</li>
+<li>$gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n \mod m_i)$</li>
 </ul>
 </li>
-<li>使用 m%n 与 x % n 是一组数  $ m_i\mod n = x_j \mod n $</li>
+<li>使用 m%n 与 x % n 是一组数  $m_i\mod n = x_j \mod n$</li>
 </ol>
 <p>当 n 为 质数的时候 费马小定理<br>$<br>a^{p-1} \equiv 1 (\mod p)<br>$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck662g3w600069sdp82edgrtz" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck6c49ou30007g2dpf07n6bdu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -339,7 +335,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck662g3w500059sdpbizz2r2m" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck6c49oty0002g2dpd1ordnek" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
@@ -411,7 +407,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck662g3wb000b9sdphpnc4ya9" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck6c49ou40008g2dp71egdskj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -478,7 +474,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck662g3wc000d9sdp6v09doqf" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck6c49oug000pg2dp6ls49fjo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -516,7 +512,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck662g3vx00009sdp0mckcfyk" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck6c49otx0001g2dpgu01gl90" class="article-share-link">Share</a>
       
       
     </footer>
@@ -561,7 +557,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck662g3w800079sdphjwdfpo2" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck6c49ots0000g2dpelyp84n4" class="article-share-link">Share</a>
       
       
     </footer>
