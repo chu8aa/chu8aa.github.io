@@ -7,15 +7,15 @@
   
   <title>欧拉函数 | 小z的笔记本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="欧拉函数  1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 \Phi(N)。 若在算数基本定理中，N&#x3D;p^{a1}_1p^{a2}_2…p^{am}_m，则： \Phi(N)&#x3D; N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} 即 \Phi(N)&#x3D; N∗ (1 -\frac {1}{p_1}) ∗ (1 -">
+  <meta name="description" content="欧拉函数  1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 $ \Phi(N) $。 若在算数基本定理中，$N&#x3D;p^{a1}_1p^{a2}_2…p^{am}_m $，则： $ \Phi(N)&#x3D; N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} $ 即 $\Phi(N)&#x3D; N∗ (1 -\frac {1}{">
 <meta property="og:type" content="article">
 <meta property="og:title" content="欧拉函数">
 <meta property="og:url" content="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="小z的笔记本">
-<meta property="og:description" content="欧拉函数  1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 \Phi(N)。 若在算数基本定理中，N&#x3D;p^{a1}_1p^{a2}_2…p^{am}_m，则： \Phi(N)&#x3D; N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} 即 \Phi(N)&#x3D; N∗ (1 -\frac {1}{p_1}) ∗ (1 -">
+<meta property="og:description" content="欧拉函数  1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 $ \Phi(N) $。 若在算数基本定理中，$N&#x3D;p^{a1}_1p^{a2}_2…p^{am}_m $，则： $ \Phi(N)&#x3D; N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} $ 即 $\Phi(N)&#x3D; N∗ (1 -\frac {1}{">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-02T13:00:07.000Z">
-<meta property="article:modified_time" content="2020-02-02T13:40:42.428Z">
+<meta property="article:modified_time" content="2020-02-03T09:36:00.701Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -90,15 +90,65 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h5><blockquote>
-<p> 1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 <script type="math/tex">\Phi(N)</script>。<br> 若在算数基本定理中，<script type="math/tex">N=p^{a1}_1p^{a2}_2…p^{am}_m</script>，则：</p>
-<script type="math/tex; mode=display">\Phi(N)= N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m}</script><p> 即 <script type="math/tex">\Phi(N)= N∗ (1 -\frac {1}{p_1}) ∗ (1 - \frac {1}{p_2} )∗…∗ (1 - \frac{1}{p_m})</script></p>
+<p> 1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 $ \Phi(N) $。<br> 若在算数基本定理中，$N=p^{a1}_1p^{a2}_2…p^{am}_m $，则：<br> $ \Phi(N)= N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} $<br> 即 $\Phi(N)= N∗ (1 -\frac {1}{p_1}) ∗ (1 - \frac {1}{p_2} )∗…∗ (1 - \frac{1}{p_m}) $</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">phi</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            res = res / i * (i - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">while</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">                x /= i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1</span>) res = res / x * (x - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>线性筛求欧拉函数</p>
+<p>O(n) 时间复杂度 求出 1 - n 所有数的 欧拉函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[] primes = <span class="keyword">new</span> <span class="keyword">int</span>[N], euler = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">boolean</span>[] st = <span class="keyword">new</span> <span class="keyword">boolean</span>[N];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_eulers</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    euler[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!st[i]) &#123;</span><br><span class="line">            primes[cnt++] = i;</span><br><span class="line">            euler[i] = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] &lt;= n / i; ++j) &#123;</span><br><span class="line">            st[primes[j] * i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % primes[j] == <span class="number">0</span>) &#123;</span><br><span class="line">                euler[i * primes[j]] = euler[i] * primes[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            euler[i * primes[j]] = euler[i] * (primes[j] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>$1$ 的欧拉函数 人为规定为 $1$</p>
+</li>
+<li><p>质数 $x$ 的欧拉函数 为 $x - 1$</p>
+</li>
+<li><p>$prime[j] * i$  </p>
+</li>
+</ul>
+<ul>
+<li>$== 0$ <ul>
+<li>$i % prime[j] == 0$ 说明 $prime[j]$ 是$ i $ 的一个 质因子 </li>
+<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>$ != 0 $ <ul>
+<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k}) * (1 - \frac{1}{prime[j]})$</li>
+</ul>
+</li>
+</ul>
+<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$<br>a ^{\Phi(n)} \equiv 1 (\mod n)<br>$</p>
+<p>a  与  n 互质 ( $ gcd(a , n ) = 1 $)</p>
+<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$<br>x =\{ x_1 ,x_2 … x_{\Phi(n)} \}<br>$</p>
+<p>$<br>m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)}\}<br>$</p>
+<ol>
+<li>m集合中任意两个数 不模 n 同余 （两数%n不相等<ul>
+<li>反证法 假设存在$ m_a , m_b $ 模 n 同与</li>
+<li>即$m_a \equiv m_b$</li>
+<li>$ m_a - m_b = n * k $</li>
+<li>$ a <em> x_a - a </em> x_b = n * k $</li>
+<li>$ a <em> (x_a - x_b) = n </em> k $</li>
+<li>$ a $ 与 $ n $ 互质 </li>
+<li>但是 $ x_k &lt; n , x_a - x_b &lt; n $</li>
+<li>所以假设不成立</li>
+</ul>
+</li>
+<li>m 中的数 % n 全部与 n 互质<ul>
+<li>$m_i = a *a_i$ </li>
+<li>$a$ 与$n$ 互质 $x_i$与$n$互质 使用$ m_i$ $与 n $互质</li>
+<li>$ gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n % m_i)$</li>
+</ul>
+</li>
+<li>使用 m%n 与 x % n 是一组数  $ m_i\mod n = x_j \mod n $</li>
+</ol>
+<p>当 n 为 质数的时候 费马小定理<br>$<br>a^{p-1} \equiv 1 (\mod p)<br>$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck652478n0005pfdpfd9jhzbr" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck662g3w600069sdp82edgrtz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -108,6 +158,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          快速幂
+        
+      </div>
+    </a>
   
   
     <a href="/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
@@ -170,6 +229,14 @@
       <ul>
         
           <li>
+            <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/">欧拉函数</a>
           </li>
         
@@ -179,14 +246,6 @@
         
           <li>
             <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/">约数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/30/%E8%B4%A8%E6%95%B0/">质数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
           </li>
         
       </ul>

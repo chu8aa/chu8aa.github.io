@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>拓展欧几里得算法 | 小z的笔记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="裴蜀定理 对于任意正整数 a, b ,一定存在非零整数 x , y ,使得 ax + by &#x3D; gcd(a , b)   并且 gcd(a,b) 是 a ,  b  能凑出的最小正整数  拓展欧几里得算法1234567891011121314static int x &#x3D; 1, y &#x3D; 0;static int exGcd(int a, int b) &amp;#123;    if (b &#x3D;&#x3D; 0) &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拓展欧几里得算法">
+<meta property="og:url" content="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="小z的笔记本">
+<meta property="og:description" content="裴蜀定理 对于任意正整数 a, b ,一定存在非零整数 x , y ,使得 ax + by &#x3D; gcd(a , b)   并且 gcd(a,b) 是 a ,  b  能凑出的最小正整数  拓展欧几里得算法1234567891011121314static int x &#x3D; 1, y &#x3D; 0;static int exGcd(int a, int b) &amp;#123;    if (b &#x3D;&#x3D; 0) &amp;#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-03T06:10:35.000Z">
+<meta property="article:modified_time" content="2020-02-03T10:02:07.994Z">
+<meta property="article:author" content="chu8aa">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小z的笔记本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chu8aa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-拓展欧几里得算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2020-02-03T06:10:35.000Z" itemprop="datePublished">2020-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      拓展欧几里得算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h5><blockquote>
+<p>对于任意正整数 <script type="math/tex">a</script>, <script type="math/tex">b</script> ,一定存在非零整数 <script type="math/tex">x</script> , <script type="math/tex">y</script> ,使得 <script type="math/tex">ax + by = gcd(a , b)</script>  </p>
+<p>并且 <script type="math/tex">gcd(a,b)</script> 是 <script type="math/tex">a</script> ,  <script type="math/tex">b</script>  能凑出的最小正整数</p>
+</blockquote>
+<h5 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b);</span><br><span class="line">    <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t - (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h6><p>$x <em> a + y </em> b = gcd(a,b) = a$  此时$b = 0 , gcd(a,b) = a$</p>
+<p>所以$x = 1 , y = 0 ，x = 1$是一定 $y=0$ 是规定 </p>
+<h6 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h6><p>$x_1 <em> a + y_1 </em>b = x_2 <em> b + y_2 </em> (a \mod b)$</p>
+<p>$a \mod b = a - \lfloor {\frac ab} \rfloor  $</p>
+<p>$x_1 <em> a  + y_1 </em> b = x_2 <em> b + y_2 </em>(a - \lfloor{\frac a b}\rfloor) <em> b = y_2 </em> a + (x_2 -\lfloor{\frac ab}\rfloor <em> y_2) </em> b$</p>
+<p>$x_2,y_2$是上一层递归求的 $x_1,y_1$是这一层要求的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int t &#x3D; x;</span><br><span class="line">x &#x3D; y;</span><br><span class="line">y &#x3D; t - (a&#x2F;b) * x;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b, y, x);</span><br><span class="line">    y -= (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$x_2 = y ,y_2 = x$</p>
+<p>$x <em> a + y </em> b = x <em> a + (y - \lfloor{\frac ab}\rfloor </em> x) * b$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck662g3w200029sdp8d3h7x5d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">快速幂</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/">欧拉函数</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">基础算法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/">约数</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 chu8aa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>

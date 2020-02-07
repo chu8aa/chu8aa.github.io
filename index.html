@@ -60,6 +60,127 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-拓展欧几里得算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2020-02-03T06:10:35.000Z" itemprop="datePublished">2020-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h5><blockquote>
+<p>对于任意正整数 <script type="math/tex">a</script>, <script type="math/tex">b</script> ,一定存在非零整数 <script type="math/tex">x</script> , <script type="math/tex">y</script> ,使得 <script type="math/tex">ax + by = gcd(a , b)</script>  </p>
+<p>并且 <script type="math/tex">gcd(a,b)</script> 是 <script type="math/tex">a</script> ,  <script type="math/tex">b</script>  能凑出的最小正整数</p>
+</blockquote>
+<h5 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b);</span><br><span class="line">    <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t - (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h6><p>$x <em> a + y </em> b = gcd(a,b) = a$  此时$b = 0 , gcd(a,b) = a$</p>
+<p>所以$x = 1 , y = 0 ，x = 1$是一定 $y=0$ 是规定 </p>
+<h6 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h6><p>$x_1 <em> a + y_1 </em>b = x_2 <em> b + y_2 </em> (a \mod b)$</p>
+<p>$a \mod b = a - \lfloor {\frac ab} \rfloor  $</p>
+<p>$x_1 <em> a  + y_1 </em> b = x_2 <em> b + y_2 </em>(a - \lfloor{\frac a b}\rfloor) <em> b = y_2 </em> a + (x_2 -\lfloor{\frac ab}\rfloor <em> y_2) </em> b$</p>
+<p>$x_2,y_2$是上一层递归求的 $x_1,y_1$是这一层要求的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int t &#x3D; x;</span><br><span class="line">x &#x3D; y;</span><br><span class="line">y &#x3D; t - (a&#x2F;b) * x;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b, y, x);</span><br><span class="line">    y -= (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$x_2 = y ,y_2 = x$</p>
+<p>$x <em> a + y </em> b = x <em> a + (y - \lfloor{\frac ab}\rfloor </em> x) * b$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck662g3w200029sdp8d3h7x5d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-快速幂" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" class="article-date">
+  <time datetime="2020-02-03T04:32:48.000Z" itemprop="datePublished">2020-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)res * a) % p);</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)a * a) % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+a = x_1 *a^{2^0} * x_2 *a^{2^1} ...x_{logb}* a^{2^{logb}}</script><script type="math/tex; mode=display">
+a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
+(a^{2^0})^2 = a^{2^1} ...</script><p>就是 b 可以 根据 二进制分解 <script type="math/tex">(5)_10 = (101)_2</script></p>
+<script type="math/tex; mode=display">5 = 2^0 + 2^2</script><h5 id="快速幂求乘法逆元"><a href="#快速幂求乘法逆元" class="headerlink" title="快速幂求乘法逆元"></a>快速幂求乘法逆元</h5><blockquote>
+<p>乘法逆元就是 <script type="math/tex">\frac{a}{b} \equiv a * b^{-1}  (\mod m)</script></p>
+<p>其中 <script type="math/tex">b|a</script>  ，<script type="math/tex">b</script> 与 <script type="math/tex">m</script> 互质</p>
+<p>且 <script type="math/tex">m</script>是质数</p>
+<script type="math/tex; mode=display">b * \frac {a} {b} \equiv a * b^{-1} * b (\mod m)</script><script type="math/tex; mode=display">a \equiv a * b ^{-1} * b (\mod m)</script><script type="math/tex; mode=display">1 \equiv b^{-1} * b (\mod m)</script><p>根据 费马小定理 <script type="math/tex">a^{p-1} \equiv 1 (\mod p)</script> p 是质数</p>
+<p>所以 <script type="math/tex">b^{-1} = a ^{p-2}</script></p>
+<ol>
+<li><p><script type="math/tex">a < m</script>  ,a 和 m 一定互质</p>
+</li>
+<li><p><script type="math/tex">a >= m</script>,a 不是m的倍数 互质</p>
+</li>
+<li><p>a 是 m 的倍数 那么不存在 乘法逆元 <script type="math/tex">a * x \mod m = 0</script> 但是 <script type="math/tex">\frac{a}{b}  \mod m</script> 不一定等于 <script type="math/tex">0</script></p>
+<p>a = 32 m = 4 b = 16  <script type="math/tex">\frac {a} {b} = 2</script> 不存在 <script type="math/tex">b ^{ -1 } * a \mod m  = 2</script></p>
+</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a % p == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">// 不存在逆元</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * a % p); <span class="comment">// 要 % p 再转换 不然还是会溢出</span></span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) (a) * a % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck662g3w100019sdp7ail23d0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-欧拉函数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" class="article-date">
@@ -87,15 +208,65 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h5><blockquote>
-<p> 1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 <script type="math/tex">\Phi(N)</script>。<br> 若在算数基本定理中，<script type="math/tex">N=p^{a1}_1p^{a2}_2…p^{am}_m</script>，则：</p>
-<script type="math/tex; mode=display">\Phi(N)= N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m}</script><p> 即 <script type="math/tex">\Phi(N)= N∗ (1 -\frac {1}{p_1}) ∗ (1 - \frac {1}{p_2} )∗…∗ (1 - \frac{1}{p_m})</script></p>
+<p> 1 ~  N 中与  N 互质的数的个数被称为欧拉函数，记为 $ \Phi(N) $。<br> 若在算数基本定理中，$N=p^{a1}_1p^{a2}_2…p^{am}_m $，则：<br> $ \Phi(N)= N∗ \frac {p_1−1 }{p_1} ∗ \frac {p_2−1}{p_2}∗…∗\frac{p_m−1}{p_m} $<br> 即 $\Phi(N)= N∗ (1 -\frac {1}{p_1}) ∗ (1 - \frac {1}{p_2} )∗…∗ (1 - \frac{1}{p_m}) $</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">phi</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = x;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            res = res / i * (i - <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">while</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">                x /= i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1</span>) res = res / x * (x - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>线性筛求欧拉函数</p>
+<p>O(n) 时间复杂度 求出 1 - n 所有数的 欧拉函数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[] primes = <span class="keyword">new</span> <span class="keyword">int</span>[N], euler = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">boolean</span>[] st = <span class="keyword">new</span> <span class="keyword">boolean</span>[N];</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_eulers</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    euler[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!st[i]) &#123;</span><br><span class="line">            primes[cnt++] = i;</span><br><span class="line">            euler[i] = i - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; primes[j] &lt;= n / i; ++j) &#123;</span><br><span class="line">            st[primes[j] * i] = <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (i % primes[j] == <span class="number">0</span>) &#123;</span><br><span class="line">                euler[i * primes[j]] = euler[i] * primes[j];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            euler[i * primes[j]] = euler[i] * (primes[j] - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>$1$ 的欧拉函数 人为规定为 $1$</p>
+</li>
+<li><p>质数 $x$ 的欧拉函数 为 $x - 1$</p>
+</li>
+<li><p>$prime[j] * i$  </p>
+</li>
+</ul>
+<ul>
+<li>$== 0$ <ul>
+<li>$i % prime[j] == 0$ 说明 $prime[j]$ 是$ i $ 的一个 质因子 </li>
+<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>$ != 0 $ <ul>
+<li>$ f(i) = i <em> (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k})$</li>
+<li>$f(i <em> prime[j]) = i </em> prime[j] <em>  (1 - \frac{1}{p_1}) </em>(1 - \frac{1}{p_2})…(1 - \frac{1}{p_k}) * (1 - \frac{1}{prime[j]})$</li>
+</ul>
+</li>
+</ul>
+<h5 id="欧拉定理"><a href="#欧拉定理" class="headerlink" title="欧拉定理"></a>欧拉定理</h5><p>$<br>a ^{\Phi(n)} \equiv 1 (\mod n)<br>$</p>
+<p>a  与  n 互质 ( $ gcd(a , n ) = 1 $)</p>
+<h6 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h6><p>$<br>x =\{ x_1 ,x_2 … x_{\Phi(n)} \}<br>$</p>
+<p>$<br>m = \{ a <em> x_1 , a </em> x_2 … a * x_{\Phi(n)}\}<br>$</p>
+<ol>
+<li>m集合中任意两个数 不模 n 同余 （两数%n不相等<ul>
+<li>反证法 假设存在$ m_a , m_b $ 模 n 同与</li>
+<li>即$m_a \equiv m_b$</li>
+<li>$ m_a - m_b = n * k $</li>
+<li>$ a <em> x_a - a </em> x_b = n * k $</li>
+<li>$ a <em> (x_a - x_b) = n </em> k $</li>
+<li>$ a $ 与 $ n $ 互质 </li>
+<li>但是 $ x_k &lt; n , x_a - x_b &lt; n $</li>
+<li>所以假设不成立</li>
+</ul>
+</li>
+<li>m 中的数 % n 全部与 n 互质<ul>
+<li>$m_i = a *a_i$ </li>
+<li>$a$ 与$n$ 互质 $x_i$与$n$互质 使用$ m_i$ $与 n $互质</li>
+<li>$ gcd(a *x_i,n ) = gcd(m_i,n) = gcd(n, n % m_i)$</li>
+</ul>
+</li>
+<li>使用 m%n 与 x % n 是一组数  $ m_i\mod n = x_j \mod n $</li>
+</ol>
+<p>当 n 为 质数的时候 费马小定理<br>$<br>a^{p-1} \equiv 1 (\mod p)<br>$</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck652478n0005pfdpfd9jhzbr" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck662g3w600069sdp82edgrtz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -150,13 +321,25 @@
 <h4 id="二分"><a href="#二分" class="headerlink" title="二分"></a>二分</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (check(mid)) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当我们将区间<script type="math/tex">[l, r]</script>划分成<script type="math/tex">[l, mid]</script>和<script type="math/tex">[mid + 1, r]</script>时，其更新操作是<script type="math/tex">r = mid</script>或者<script type="math/tex">l = mid + 1</script>;，计算<script type="math/tex">mid</script>时不需要加<script type="math/tex">1</script>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">search</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (check(mid)) l = mid;</span><br><span class="line">        <span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>当我们将区间<script type="math/tex">[l, r]</script>划分成<script type="math/tex">[l, mid - 1]</script>和<script type="math/tex">[mid, r]</script>时，其更新操作是<script type="math/tex">r = mid - 1</script>或者<script type="math/tex">l = mid</script>;，此时为了防止死循环，计算<script type="math/tex">mid</script>时需要加<script type="math/tex">1</script>。</p>
-<p><a href="https://www.acwing.com/blog/content/31/" target="_blank" rel="noopener">二分</a></p>
+<p><a href="https://www.acwing.com/blog/content/31/" target="_blank" rel="noopener">整数二分</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">search</span><span class="params">(<span class="keyword">double</span> l, <span class="keyword">double</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (r - l &gt; <span class="number">1e-8</span>) &#123; <span class="comment">// 比题目要求的精度大 2-3</span></span><br><span class="line">        <span class="keyword">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(check()) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">double</span> <span class="title">search</span><span class="params">(<span class="keyword">double</span> l, <span class="keyword">double</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">double</span> mid = (l + r) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (check()) r = mid;</span><br><span class="line">        <span class="keyword">else</span> l = mid;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>求二次方 要注意$\sqrt{0.01} = 0.1$ 所以 r = max (x , 1)</p>
+<p>求三次方 要注意l，r 不能直接等于 -x 和 x 第一和上面一样 第二是 x 可能为负数</p>
+<hr>
+<h5 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        arr[i] = in.nextInt();</span><br><span class="line">        arr[i] += arr[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 求 a ，b 之间的和</span></span><br><span class="line">    <span class="keyword">int</span> a = in.nextInt(), b = in.nextInt();</span><br><span class="line">    System.out.println(arr[b] - arr[a - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">    <span class="keyword">int</span> m = in.nextInt();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            arr[i][j] = in.nextInt();</span><br><span class="line">            arr[i][j] += arr[i - <span class="number">1</span>][j] + arr[i][j - <span class="number">1</span>] - arr[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 求 ( x1, y1)  和 ( x2, y2) 之间的和 </span></span><br><span class="line">    <span class="keyword">int</span> x1 = in.nextInt(), y1 = in.nextInt(), x2 = in.nextInt(), y2 = in.nextInt();</span><br><span class="line">    System.out.println(</span><br><span class="line">      arr[x2][y2] - arr[x2][y1 - <span class="number">1</span>] - arr[x1 - <span class="number">1</span>][y2] + arr[x1 - <span class="number">1</span>][y1 - <span class="number">1</span>]</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">100010</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        arr[i] = in.nextInt();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt; <span class="number">0</span>; --i) &#123;</span><br><span class="line">        arr[i] -= arr[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// l , r 之间每个数加上 x</span></span><br><span class="line">    <span class="keyword">int</span> l = in.nextInt(), r = in.nextInt(), x = in.nextInt();</span><br><span class="line">    arr[l] += x;</span><br><span class="line">    arr[r + <span class="number">1</span>] -= x;</span><br><span class="line">    <span class="comment">// 前缀和 求操作之后的数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        arr[i] += arr[i - <span class="number">1</span>];</span><br><span class="line">        System.out.print(arr[i] + <span class="string">" "</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">1010</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">    <span class="keyword">int</span> n = in.nextInt(), m = in.nextInt();</span><br><span class="line">    <span class="keyword">int</span> q = in.nextInt();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = in.nextInt();</span><br><span class="line">            add(i, j, i, j, x);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (q-- != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 对 ( x1 , y1)和( x2 , y2) 之间 加上 x </span></span><br><span class="line">        <span class="keyword">int</span> x1 = in.nextInt(), y1 = in.nextInt(), x2 = in.nextInt(), y2 = in.nextInt(), x = in.nextInt();</span><br><span class="line">        add(x1, y1, x2, y2, x);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            arr[i][j] += arr[i - <span class="number">1</span>][j] + arr[i][j - <span class="number">1</span>] - arr[i - <span class="number">1</span>][j - <span class="number">1</span>];</span><br><span class="line">            System.out.print(arr[i][j] + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x1, <span class="keyword">int</span> y1, <span class="keyword">int</span> x2, <span class="keyword">int</span> y2, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    arr[x1][y1] += x;</span><br><span class="line">    arr[x2 + <span class="number">1</span>][y1] -= x;</span><br><span class="line">    arr[x1][y2 + <span class="number">1</span>] -= x;</span><br><span class="line">    arr[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有从构造函数入手，而是从插入的影响入手 ，根据一维差分 和 二维前缀和 性质 对$( x1 , y1)$ 加上 x 会使$ ( x1 , y1)$后面全部的数加上 $x$ </p>
+<p>全部的数一开始差分为 $0$ 每次加入一个数 进行一次操作</p>
 <hr>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck652478j0001pfdpanvxhupb" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck662g3w500059sdpbizz2r2m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
@@ -228,7 +411,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck652478p0007pfdp56vfbsfr" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck662g3wb000b9sdphpnc4ya9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -295,7 +478,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck652478o0006pfdpg5eq8bno" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck662g3wc000d9sdp6v09doqf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -333,7 +516,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck652478k0002pfdpgcyc9onb" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck662g3vx00009sdp0mckcfyk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +561,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck652478e0000pfdphm455nod" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck662g3w800079sdphjwdfpo2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -440,6 +623,14 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       <ul>
         
           <li>
+            <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/">欧拉函数</a>
           </li>
         
@@ -449,14 +640,6 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
         
           <li>
             <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/">约数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/30/%E8%B4%A8%E6%95%B0/">质数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">我的第一篇博客文章</a>
           </li>
         
       </ul>
