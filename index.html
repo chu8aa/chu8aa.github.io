@@ -106,14 +106,14 @@ a * b \mod p = (a \mod p) (b \mod p )</script><hr>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">qmi</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * a % p);</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) a * a % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lucas</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; p &amp;&amp; b &lt; p) <span class="keyword">return</span> C(a, b, p);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) ((<span class="keyword">long</span>) lucas(a / p, b / p, p) * C(a % p, b % p, p) % p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b &gt; a) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">1</span>, j = a; i &lt;= b; ++i, --j) &#123;</span><br><span class="line">        res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * j % p);</span><br><span class="line">        res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * qmi(i, p - <span class="number">2</span>, p) % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <hr>
 <p>卡特兰数</p>
-<p><img src="/.io//Catalan.jpeg" alt="Catalan1"><br><img src="/.io//Catalan2.png" alt="Catalan2"></p>
+<p><img src="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/Catalan.jpeg" alt="Catalan1"><br><img src="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/Catalan2.png" alt="Catalan2"></p>
 <script type="math/tex; mode=display">
 \mathsf{C}_{2n}^{n} - \mathsf{C}_{2n}^{n-1} = \frac{\mathsf{C}_{2n}^{n}}{n + 1}</script><p>可以直接写 或者函数$\mathsf{C}$ 或者使用Lucas定理或者上面的方法</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/" data-id="ck6g8ayea000iredpfh8j1ro2" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/" data-id="ck6g8ffx70007yxdp9oa22q86" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -156,7 +156,7 @@ a * b \mod p = (a \mod p) (b \mod p )</script><hr>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" data-id="ck6g8ayec000oredpeu15bnrr" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" data-id="ck6g8ffxe000nyxdp1yct0a9a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +212,7 @@ x \equiv a_n(\mod m_n)\\
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/" data-id="ck6g8aydy0001redp1cyw053q" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/" data-id="ck6g8ffxc000jyxdp02xva3fi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -275,7 +275,7 @@ x \equiv a_n(\mod m_n)\\
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck6g8aye50007redphh2e5nbz" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck6g8ffx20002yxdp4qkvge6m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -343,7 +343,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6g8aye30005redphl3n95df" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6g8ffx9000byxdpg4dyh730" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -437,7 +437,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck6g8aye7000bredp201vcsju" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck6g8ffx60006yxdp276e3iez" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -510,7 +510,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck6g8aye00002redp9yq8ctlk" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck6g8ffx00001yxdp3m91hwo2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
@@ -582,7 +582,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck6g8aye8000dredp8jpw8nwq" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck6g8ffxa000cyxdpge1chtox" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -649,7 +649,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck6g8ayeb000lredp8cv55t3v" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck6g8ffxb000gyxdp7dzn4gws" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -687,7 +687,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck6g8aye40006redpd81r48ai" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck6g8ffx50005yxdpfjpa0m3s" class="article-share-link">Share</a>
       
       
     </footer>
