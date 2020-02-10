@@ -15,7 +15,7 @@
 <meta property="og:description" content="快速幂1234567891011private static int qmi(int a, int b, int p) &amp;#123;    int res &#x3D; 1;    while (b !&#x3D; 0) &amp;#123;        if ((b &amp; 1) !&#x3D; 0) &amp;#123;            res &#x3D; (int) (((long)res * a) % p);        &amp;#1">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-02-03T04:32:48.000Z">
-<meta property="article:modified_time" content="2020-02-07T11:41:27.963Z">
+<meta property="article:modified_time" content="2020-02-09T11:45:18.765Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -95,18 +95,22 @@ a = x_1 *a^{2^0} * x_2 *a^{2^1} ...x_{logb}* a^{2^{logb}}</script><script type="
 a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 (a^{2^0})^2 = a^{2^1} ...</script><p>就是 b 可以 根据 二进制分解 <script type="math/tex">(5)_10 = (101)_2</script></p>
 <script type="math/tex; mode=display">5 = 2^0 + 2^2</script><h5 id="快速幂求乘法逆元"><a href="#快速幂求乘法逆元" class="headerlink" title="快速幂求乘法逆元"></a>快速幂求乘法逆元</h5><blockquote>
-<p>乘法逆元就是 <script type="math/tex">\frac{a}{b} \equiv a * b^{-1}  (\mod m)</script></p>
+<p>乘法逆元就是 $ \frac{a}{b} \equiv a \star b^{-1}  (\mod m) $ 即$b^{-1}$ 称作$b$ 模$m$ 的逆元 </p>
+<p>$b$ 逆元的充分必要条件是  $b$与 $m$ 互质 当$m$ 为质数的时候 $b^{m-2}$ 就是$b$的逆元</p>
 <p>其中 <script type="math/tex">b|a</script>  ，<script type="math/tex">b</script> 与 <script type="math/tex">m</script> 互质</p>
 <p>且 <script type="math/tex">m</script>是质数</p>
-<script type="math/tex; mode=display">b * \frac {a} {b} \equiv a * b^{-1} * b (\mod m)</script><script type="math/tex; mode=display">a \equiv a * b ^{-1} * b (\mod m)</script><script type="math/tex; mode=display">1 \equiv b^{-1} * b (\mod m)</script><p>根据 费马小定理 <script type="math/tex">a^{p-1} \equiv 1 (\mod p)</script> p 是质数</p>
+<p>$ b \star \frac {a} {b} \equiv a \star b^{-1} \star b (\mod m)$</p>
+<p>$ a \equiv a * b ^{-1} \star b (\mod m) $</p>
+<p>$1 \equiv b^{-1} \star b (\mod m)$</p>
+<p>根据 费马小定理 <script type="math/tex">a^{p-1} \equiv 1 (\mod p)</script> p 是质数</p>
 <p>所以 <script type="math/tex">b^{-1} = a ^{p-2}</script></p>
 <ol>
 <li><p><script type="math/tex">a < m</script>  ,a 和 m 一定互质</p>
 </li>
 <li><p><script type="math/tex">a >= m</script>,a 不是m的倍数 互质</p>
 </li>
-<li><p>a 是 m 的倍数 那么不存在 乘法逆元 <script type="math/tex">a * x \mod m = 0</script> 但是 <script type="math/tex">\frac{a}{b}  \mod m</script> 不一定等于 <script type="math/tex">0</script></p>
-<p>a = 32 m = 4 b = 16  <script type="math/tex">\frac {a} {b} = 2</script> 不存在 <script type="math/tex">b ^{ -1 } * a \mod m  = 2</script></p>
+<li><p>a 是 m 的倍数 那么不存在 乘法逆元 $ a \star x \mod m = 0 $ 但是 <script type="math/tex">\frac{a}{b}  \mod m</script> 不一定等于 <script type="math/tex">0</script></p>
+<p>a = 32 m = 4 b = 16  <script type="math/tex">\frac {a} {b} = 2</script> 不存在 $ b ^{ -1 } \star a \mod m  = 2 $</p>
 </li>
 </ol>
 </blockquote>
@@ -115,7 +119,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6c4ullx000cksdp3d85dg2q" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6g8aye30005redphl3n95df" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -196,23 +200,23 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       <ul>
         
           <li>
+            <a href="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/">组合数</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/">高斯消元</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/">中国剩余定理</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
           </li>
         
           <li>
             <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/">欧拉函数</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/">基础算法</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/">约数</a>
           </li>
         
       </ul>
