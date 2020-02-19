@@ -60,6 +60,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-约数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/" class="article-date">
+  <time datetime="2020-01-30T12:19:47.000Z" itemprop="datePublished">2020-01-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/30/%E7%BA%A6%E6%95%B0/">约数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="试除法求约数"><a href="#试除法求约数" class="headerlink" title="试除法求约数"></a>试除法求约数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ArrayList&lt;Integer&gt; arr = <span class="keyword">new</span> ArrayList&lt;&gt;();     </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_divisor</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            arr.add(i);</span><br><span class="line">            <span class="keyword">if</span> (i != x / i) arr.add(x / i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    arr.sort((o1,o2)-&gt; o1-o2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="约数个数"><a href="#约数个数" class="headerlink" title="约数个数"></a>约数个数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_divisor_cnt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">                x /= i;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            hs.put(i, hs.getOrDefault(i, <span class="number">0</span>) + cnt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1</span>) hs.put(x, hs.getOrDefault(x, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 求约数个数</span></span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (Integer value : hs.values()) &#123;</span><br><span class="line">        sum = (sum * (value + <span class="number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于一个大于1 的正整数n可以分解质因数：</p>
+<script type="math/tex; mode=display">
+n = \prod_{i=1}^k p_i^{a_i} = p_1^{a_1} * p_2^{a_2} ... p_k^{a_k}</script><script type="math/tex; mode=display">p_i^{a_i} $$ 的约数有 $$ p_i^0,p_i^1,p_i^2...p_i^{ak}</script><p>约数的个数就是从每个挑选出一些<br>所以n 的正约数个数就是</p>
+<script type="math/tex; mode=display">
+f(n) = \prod_{i = 1}^k{(a_i + 1)} = (a_1 + 1) * (a_2 + 1)...(a_k + 1)</script><p><a href="https://baike.baidu.com/item/约数个数定理" target="_blank" rel="noopener">约数个数定理</a></p>
+<p>int 范围内约数个数最多大概是 1600+ 或者1700+</p>
+<hr>
+<h5 id="约数之和"><a href="#约数之和" class="headerlink" title="约数之和"></a>约数之和</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_divisor_sum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> MOD = <span class="number">1000000007L</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">                x /= i;</span><br><span class="line">                cnt++;</span><br><span class="line">            &#125;</span><br><span class="line">            hs.put(i, hs.getOrDefault(i, <span class="number">0</span>) + cnt);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (x &gt; <span class="number">1</span>) hs.put(x, hs.getOrDefault(x, <span class="number">0</span>) + <span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 求约数之和</span></span><br><span class="line">    <span class="keyword">long</span> sum = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;Integer, Integer&gt; entry : hs.entrySet()) &#123;</span><br><span class="line">        <span class="keyword">int</span> p = entry.getKey(), a = entry.getValue();</span><br><span class="line">        <span class="keyword">long</span> t = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (a-- != <span class="number">0</span>) &#123;</span><br><span class="line">            t = (t * p + <span class="number">1</span>) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = sum * t % MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(sum);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根据约数个数和乘法原理可得约数和公式</p>
+<script type="math/tex; mode=display">
+f(n) = (p_1^0 + p_1^1 + p_1^2...p_1^{a1})*(p_2^0 + p_2^1 + p_2^2...p_2^{a2})...
+(p_k^0 + p_k^1 + p_k^2...p_k^{ak})</script><p><a href="https://baike.baidu.com/item/约数和定理" target="_blank" rel="noopener">约数之和定理</a></p>
+<hr>
+<h5 id="最大公约数"><a href="#最大公约数" class="headerlink" title="最大公约数"></a>最大公约数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://baike.baidu.com/item/欧几里得算法" target="_blank" rel="noopener">欧几里得算法证明</a></p>
+<blockquote>
+<p>证 a , b 和 b , a % b 的公约数一样</p>
+<p>假设d 是 a,b 的一个公约数 记作 <script type="math/tex">d |a , d | b</script></p>
+<script type="math/tex; mode=display">
+a = k * b + r</script><script type="math/tex; mode=display">
+a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
+\frac{r}{d} = \frac{a}{d} + \frac{k *d}{d}</script><p>等式右边必然是一个整数 </p>
+<p>所以 d 也是 r 的约数</p>
+<p>证毕</p>
+</blockquote>
+<p>​    为什么是最大公约数？  <script type="math/tex">b = 0</script></p>
+<p><a href="https://baike.baidu.com/item/更相减损术" target="_blank" rel="noopener">更相减损法</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck6qg4kxv000qfwdp7i5p2rpu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-质数" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/30/%E8%B4%A8%E6%95%B0/" class="article-date">
@@ -265,6 +337,10 @@
       <ul>
         
           <li>
+            <a href="/2020/02/18/%E7%BA%BF%E6%80%A7%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">线性动态规划</a>
+          </li>
+        
+          <li>
             <a href="/2020/02/17/%E6%A0%91%E5%BD%A2%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">树形动态规划</a>
           </li>
         
@@ -278,10 +354,6 @@
         
           <li>
             <a href="/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/">高斯消元</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/">中国剩余定理</a>
           </li>
         
       </ul>
@@ -329,21 +401,5 @@
 
 
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 </html>
