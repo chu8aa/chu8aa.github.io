@@ -130,7 +130,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck79x2kk6000v4ndp0bzj5z9o" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck79zyofy000v8idpfz6v306i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -248,6 +248,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
     </div>
   </div>
 </footer>
+
     </div>
     <nav id="mobile-nav">
   
@@ -273,6 +274,39 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 <script src="/js/script.js"></script>
 
 
+
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+<a>上</a>
+</div>
+<script>
+  (function($) { 
+    // When to show the scroll link
+    // higher number = scroll link appears further down the page   
+    var upperLimit = 150;
+    
+    // Our scroll link element
+    var scrollElem = $('#totop');
+     
+    // Scroll to top speed
+    var scrollSpeed = 500;
+     
+    // Show and hide the scroll to top link based on scroll position   
+    scrollElem.hide();
+    $(window).scroll(function () {            
+      var scrollTop = $(document).scrollTop();       
+      if ( scrollTop > upperLimit ) {
+        $(scrollElem).stop().fadeTo(300, 1); // fade back in           
+      }else{       
+        $(scrollElem).stop().fadeTo(300, 0); // fade out
+      }
+    });
+    // Scroll to top animation on click
+    $(scrollElem).click(function(){
+      $('html, body').animate({scrollTop:0}, scrollSpeed); return false;
+    });
+  })(jQuery);
+</script>
 
 
   </div>
