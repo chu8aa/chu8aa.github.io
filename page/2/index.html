@@ -60,7 +60,81 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-拓展欧几里得算法" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" class="article-date">
+  <time datetime="2020-02-03T06:10:35.000Z" itemprop="datePublished">2020-02-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/">拓展欧几里得算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="裴蜀定理"><a href="#裴蜀定理" class="headerlink" title="裴蜀定理"></a>裴蜀定理</h5><blockquote>
+<p>对于任意正整数 <script type="math/tex">a</script>, <script type="math/tex">b</script> ,一定存在非零整数 <script type="math/tex">x</script> , <script type="math/tex">y</script> ,使得 <script type="math/tex">ax + by = gcd(a , b)</script>  </p>
+<p>并且 <script type="math/tex">gcd(a,b)</script> 是 <script type="math/tex">a</script> ,  <script type="math/tex">b</script>  能凑出的最小正整数</p>
+</blockquote>
+<h5 id="拓展欧几里得算法"><a href="#拓展欧几里得算法" class="headerlink" title="拓展欧几里得算法"></a>拓展欧几里得算法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b);</span><br><span class="line">    <span class="keyword">int</span> t = x;</span><br><span class="line">    x = y;</span><br><span class="line">    y = t - (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="边界情况"><a href="#边界情况" class="headerlink" title="边界情况"></a>边界情况</h6><p>当$x \star a + y \star b = gcd(a,b) = a $  此时 $b = 0 , gcd(a,b) = a$</p>
+<p>所以$x = 1 , y = 0 ，x = 1$是一定 $y=0$ 是规定 </p>
+<h6 id="一般情况"><a href="#一般情况" class="headerlink" title="一般情况"></a>一般情况</h6><p>$x_1 \star a + y_1 \star b = x_2 \star b + y_2 \star (a \mod b)$</p>
+<p>$ a \mod b = a - \lfloor {\frac ab} \rfloor $</p>
+<p>$ x_1 \star a  + y_1 \star b = x_2 \star b + y_2 \star(a - \lfloor{\frac a b}\rfloor) \star b = y_2 \star a + (x_2 -\lfloor{\frac ab}\rfloor \star y_2) \star b $</p>
+<p>$x_2,y_2$是上一层递归求的 $x_1,y_1$是这一层要求的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> t = x;</span><br><span class="line">x = y;</span><br><span class="line">y = t - (a/b) * x;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">exGcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> d = exGcd(b, a % b, y, x);</span><br><span class="line">    y -= (a / b) * x;</span><br><span class="line">    <span class="keyword">return</span> d;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$x_2 = y ,y_2 = x$</p>
+<p>$x \star a + y \star b = x \star a + (y - \lfloor{\frac ab}\rfloor \star x) \star b$</p>
+<hr>
+<h5 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h5><p><a herf="https://www.acwing.com/problem/content/880/">线性同余方程</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Scanner;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> x, y;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">        <span class="keyword">while</span> (n-- != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> a = in.nextInt(), b = in.nextInt(), m = in.nextInt();</span><br><span class="line">            <span class="keyword">int</span> d = exgcd(a, m);</span><br><span class="line">            <span class="keyword">if</span> (b % d != <span class="number">0</span>) System.out.println(<span class="string">"impossible"</span>);</span><br><span class="line">            <span class="keyword">else</span> System.out.println((<span class="keyword">long</span>) x * (b / d) % m);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">            x = <span class="number">1</span>;</span><br><span class="line">            y = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> d = exgcd(b, a % b);</span><br><span class="line">        <span class="keyword">int</span> t = x;</span><br><span class="line">        x = y;</span><br><span class="line">        y = t - (a / b) * x;</span><br><span class="line">        <span class="keyword">return</span> d;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$a \star x \equiv b (\mod m)$</p>
+<p>$ax + km = b$</p>
+<p>$b$ 要求是$gcd(a,m)$的倍数 那么就存在解</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" data-id="ck79x2kk0000i4ndp3tfp6grw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-快速幂" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" class="article-date">
   <time datetime="2020-02-03T04:32:48.000Z" itemprop="datePublished">2020-02-03</time>
@@ -84,6 +158,10 @@
 
       </header>
     
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)res * a) % p);</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)a * a) % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -116,7 +194,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck6qg4kxl0006fwdp7weue9vs" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck79x2kjw000a4ndpakyl01sg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -127,8 +205,12 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-欧拉函数" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" class="article-date">
   <time datetime="2020-02-02T13:00:07.000Z" itemprop="datePublished">2020-02-02</time>
@@ -152,6 +234,10 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 
       </header>
     
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h5><blockquote>
@@ -210,7 +296,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck6qg4kxs000jfwdpcqmn695m" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" data-id="ck79x2kk5000s4ndp5za0a1bh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -221,8 +307,12 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-基础算法" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" class="article-date">
   <time datetime="2020-02-02T02:57:59.000Z" itemprop="datePublished">2020-02-02</time>
@@ -246,6 +336,10 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 
       </header>
     
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
     <div class="article-entry" itemprop="articleBody">
       
         <h4 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h4><h5 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="keyword">int</span>[] q, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt;= r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> i = l - <span class="number">1</span>, j = r + <span class="number">1</span>, x = q[(l + r) &gt;&gt; <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">while</span> (i &lt; j) &#123;</span><br><span class="line">        <span class="keyword">do</span> i++; <span class="keyword">while</span> (q[i] &lt; x);</span><br><span class="line">        <span class="keyword">do</span> j--; <span class="keyword">while</span> (q[j] &gt; x);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; j) &#123;</span><br><span class="line">            q[i] ^= q[j];</span><br><span class="line">            q[j] ^= q[i];</span><br><span class="line">            q[i] ^= q[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    quick_sort(q, l, j);</span><br><span class="line">    quick_sort(q, j + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -289,7 +383,7 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck6qg4kxm0007fwdp6qwt3f3g" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/02/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" data-id="ck79x2kjt00064ndpaeb601i3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li></ul>
@@ -300,8 +394,12 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-约数" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/01/30/%E7%BA%A6%E6%95%B0/" class="article-date">
   <time datetime="2020-01-30T12:19:47.000Z" itemprop="datePublished">2020-01-30</time>
@@ -325,6 +423,10 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
 
       </header>
     
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="试除法求约数"><a href="#试除法求约数" class="headerlink" title="试除法求约数"></a>试除法求约数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> ArrayList&lt;Integer&gt; arr = <span class="keyword">new</span> ArrayList&lt;&gt;();     </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">get_divisor</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= x / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (x % i == <span class="number">0</span>) &#123;</span><br><span class="line">            arr.add(i);</span><br><span class="line">            <span class="keyword">if</span> (i != x / i) arr.add(x / i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    arr.sort((o1,o2)-&gt; o1-o2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -361,7 +463,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck6qg4kxv000qfwdp7i5p2rpu" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E7%BA%A6%E6%95%B0/" data-id="ck79x2kk6000v4ndp0bzj5z9o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -372,8 +474,12 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-质数" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/01/30/%E8%B4%A8%E6%95%B0/" class="article-date">
   <time datetime="2020-01-30T11:58:04.000Z" itemprop="datePublished">2020-01-30</time>
@@ -397,6 +503,10 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 
       </header>
     
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
     <div class="article-entry" itemprop="articleBody">
       
         <h5 id="判断某个数是否是质数"><a href="#判断某个数是否是质数" class="headerlink" title="判断某个数是否是质数"></a>判断某个数是否是质数</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">is_prime</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n / i; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n % i == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -428,7 +538,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck6qg4kxu000nfwdpc53u92ox" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/30/%E8%B4%A8%E6%95%B0/" data-id="ck79x2kkt001d4ndpdcnu438x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
@@ -439,8 +549,12 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-我的第一篇博客文章" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" class="article-date">
   <time datetime="2020-01-28T13:24:50.000Z" itemprop="datePublished">2020-01-28</time>
@@ -461,12 +575,16 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
       
         
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck6qg4kxk0005fwdph1d95rd9" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/" data-id="ck79x2kjx000b4ndp1prefevc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -475,8 +593,12 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 </article>
 
 
+
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/01/28/hello-world/" class="article-date">
   <time datetime="2020-01-28T12:48:59.540Z" itemprop="datePublished">2020-01-28</time>
@@ -497,6 +619,10 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
@@ -511,13 +637,14 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck6qg4kxa0000fwdpfxg2adgy" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck79x2kjm00014ndp22vz49rx" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
 </article>
+
 
 
   
@@ -546,7 +673,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
     </div>
   </div>
 
@@ -556,7 +683,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
+      <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
     </div>
   </div>
 
@@ -565,7 +692,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
     </div>
   </div>
 
@@ -576,6 +703,10 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/03/01/Leetcode%E6%89%93%E5%8D%A1/">Leetcode打卡</a>
+          </li>
         
           <li>
             <a href="/2020/02/23/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">最短路径</a>
@@ -591,10 +722,6 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
         
           <li>
             <a href="/2020/02/18/%E7%BA%BF%E6%80%A7%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">线性动态规划</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/17/%E6%A0%91%E5%BD%A2%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">树形动态规划</a>
           </li>
         
       </ul>
@@ -642,5 +769,21 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

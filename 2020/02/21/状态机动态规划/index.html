@@ -64,6 +64,9 @@
 </header>
       <div class="outer">
         <section id="main"><article id="post-状态机动态规划" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
   <div class="article-meta">
     <a href="/2020/02/21/%E7%8A%B6%E6%80%81%E6%9C%BA%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="article-date">
   <time datetime="2020-02-21T09:23:49.000Z" itemprop="datePublished">2020-02-21</time>
@@ -88,6 +91,10 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#大盗阿福"><span class="post-toc-text">大盗阿福</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#股票买卖-IV"><span class="post-toc-text">股票买卖 IV</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#股票买卖-V"><span class="post-toc-text">股票买卖 V</span></a></li></ol>
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
       
         <h6 id="大盗阿福"><a href="#大盗阿福" class="headerlink" title="大盗阿福"></a>大盗阿福</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">阿福是一名经验丰富的大盗。趁着月黑风高，阿福打算今晚洗劫一条街上的店铺。</span><br><span class="line"></span><br><span class="line">这条街上一共有 N 家店铺，每家店中都有一些现金。</span><br><span class="line"></span><br><span class="line">阿福事先调查得知，只有当他同时洗劫了两家相邻的店铺时，街上的报警系统才会启动，然后警察就会蜂拥而至。</span><br><span class="line"></span><br><span class="line">作为一向谨慎作案的大盗，阿福不愿意冒着被警察追捕的风险行窃。</span><br><span class="line"></span><br><span class="line">他想知道，在不惊动警察的情况下，他今晚最多可以得到多少现金？</span><br><span class="line"></span><br><span class="line">输入格式</span><br><span class="line">输入的第一行是一个整数 T，表示一共有 T 组数据。</span><br><span class="line"></span><br><span class="line">接下来的每组数据，第一行是一个整数 N ，表示一共有 N 家店铺。</span><br><span class="line"></span><br><span class="line">第二行是 N 个被空格分开的正整数，表示每一家店铺中的现金数量。</span><br><span class="line"></span><br><span class="line">每家店铺中的现金数量均不超过1000。</span><br><span class="line"></span><br><span class="line">输出格式</span><br><span class="line">对于每组数据，输出一行。</span><br><span class="line"></span><br><span class="line">该行包含一个整数，表示阿福在不惊动警察的情况下可以得到的现金数量。</span><br><span class="line"></span><br><span class="line">数据范围</span><br><span class="line">1 ≤ T ≤ 50,</span><br><span class="line">1 ≤ N ≤ 1e5</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> f[N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, t;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; t;</span><br><span class="line">        f[i][<span class="number">1</span>] = f[i - <span class="number">1</span>][<span class="number">0</span>] + t;</span><br><span class="line">        f[i][<span class="number">0</span>] = <span class="built_in">max</span>(f[i - <span class="number">1</span>][<span class="number">0</span>], f[i - <span class="number">1</span>][<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">max</span>(f[n][<span class="number">1</span>], f[n][<span class="number">0</span>]) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -102,7 +109,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/21/%E7%8A%B6%E6%80%81%E6%9C%BA%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" data-id="ck6z1mczi0003pydp599eeebo" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/02/21/%E7%8A%B6%E6%80%81%E6%9C%BA%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" data-id="ck79x2kk3000o4ndp3abj0ldf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li></ul>
@@ -133,6 +140,7 @@
   
 </article>
 
+
 </section>
         
           <aside id="sidebar">
@@ -151,7 +159,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
     </div>
   </div>
 
@@ -161,7 +169,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
+      <a href="/tags/Leetcode/" style="font-size: 10px;">Leetcode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 15px;">动态规划</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
     </div>
   </div>
 
@@ -170,7 +178,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
     </div>
   </div>
 
@@ -181,6 +189,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/03/01/Leetcode%E6%89%93%E5%8D%A1/">Leetcode打卡</a>
+          </li>
         
           <li>
             <a href="/2020/02/23/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">最短路径</a>
@@ -196,10 +208,6 @@
         
           <li>
             <a href="/2020/02/18/%E7%BA%BF%E6%80%A7%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">线性动态规划</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/17/%E6%A0%91%E5%BD%A2%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">树形动态规划</a>
           </li>
         
       </ul>
@@ -247,5 +255,21 @@
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
