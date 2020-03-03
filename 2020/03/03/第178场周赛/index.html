@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>第178场周赛 | 小z的笔记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1365. 有多少小于当前数字的数字解题思路可以直接二重循环，也可以记下数然后去遍历，遍历可以用前缀和 代码123456789101112131415161718public int[] smallerNumbersThanCurrent(int[] nums) &amp;#123;    int[] cnts &#x3D; new int[105];    for (int num : nums) &amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第178场周赛">
+<meta property="og:url" content="https://chu8aa.github.io/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/index.html">
+<meta property="og:site_name" content="小z的笔记本">
+<meta property="og:description" content="1365. 有多少小于当前数字的数字解题思路可以直接二重循环，也可以记下数然后去遍历，遍历可以用前缀和 代码123456789101112131415161718public int[] smallerNumbersThanCurrent(int[] nums) &amp;#123;    int[] cnts &#x3D; new int[105];    for (int num : nums) &amp;#123;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-03T08:26:32.000Z">
+<meta property="article:modified_time" content="2020-03-03T08:47:45.487Z">
+<meta property="article:author" content="chu8aa">
+<meta property="article:tag" content="Leetcode">
+<meta property="article:tag" content="周赛">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小z的笔记本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chu8aa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-第178场周赛" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/" class="article-date">
+  <time datetime="2020-03-03T08:26:32.000Z" itemprop="datePublished">2020-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>►<a class="article-category-link" href="/categories/Leetcode/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第178场周赛
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1365-有多少小于当前数字的数字"><span class="post-toc-text">1365. 有多少小于当前数字的数字</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#解题思路"><span class="post-toc-text">解题思路</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#代码"><span class="post-toc-text">代码</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1366-通过投票对团队排名"><span class="post-toc-text">1366. 通过投票对团队排名</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#解题思路-1"><span class="post-toc-text">解题思路</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#代码-1"><span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1367-二叉树中的列表"><span class="post-toc-text">1367. 二叉树中的列表</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#解题思路-2"><span class="post-toc-text">解题思路</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#代码-2"><span class="post-toc-text">代码</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1368-使网格图至少有一条有效路径的最小代价"><span class="post-toc-text">1368. 使网格图至少有一条有效路径的最小代价</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#解题思路-3"><span class="post-toc-text">解题思路</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#代码-3"><span class="post-toc-text">代码</span></a></li></ol></li></ol>
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1365-有多少小于当前数字的数字"><a href="#1365-有多少小于当前数字的数字" class="headerlink" title="1365. 有多少小于当前数字的数字"></a><a href="https://leetcode-cn.com/problems/how-many-numbers-are-smaller-than-the-current-number/" target="_blank" rel="noopener">1365. 有多少小于当前数字的数字</a></h5><h6 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h6><p>可以直接二重循环，也可以记下数然后去遍历，遍历可以用前缀和</p>
+<h6 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span>[] smallerNumbersThanCurrent(<span class="keyword">int</span>[] nums) &#123;</span><br><span class="line">    <span class="keyword">int</span>[] cnts = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">105</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> num : nums) &#123;</span><br><span class="line">        cnts[num]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; ++i) &#123;</span><br><span class="line">        cnts[i] += cnts[i - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span>[] ans = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (nums[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            ans[i] = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ans[i] = cnts[nums[i] - <span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1366-通过投票对团队排名"><a href="#1366-通过投票对团队排名" class="headerlink" title="1366. 通过投票对团队排名"></a><a href="https://leetcode-cn.com/problems/rank-teams-by-votes/" target="_blank" rel="noopener">1366. 通过投票对团队排名</a></h5><h6 id="解题思路-1"><a href="#解题思路-1" class="headerlink" title="解题思路"></a>解题思路</h6><p>模拟下记录下全部队的全部得分情况，排序输出</p>
+<h5 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">rankTeams</span><span class="params">(String[] votes)</span> </span>&#123;</span><br><span class="line">    Rank[] ranks = <span class="keyword">new</span> Rank[<span class="number">26</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) &#123;</span><br><span class="line">        ranks[i] = <span class="keyword">new</span> Rank((<span class="keyword">char</span>) (i + <span class="string">'A'</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (votes.length == <span class="number">1</span> || votes[<span class="number">0</span>].length() == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> votes[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> n = votes[<span class="number">0</span>].length();</span><br><span class="line">    <span class="keyword">for</span> (String vote : votes) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            ranks[vote.charAt(i) - <span class="string">'A'</span>].ranks[i]++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Arrays.sort(ranks, <span class="keyword">new</span> Comparator&lt;Rank&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Rank o1, Rank o2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span>(o1.ranks[i] == o2.ranks[i]) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">return</span> o2.ranks[i] - o1.ranks[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    StringBuilder ans = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        ans.append(ranks[i].name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rank</span> </span>&#123;</span><br><span class="line">    <span class="keyword">char</span> name;</span><br><span class="line">    <span class="keyword">int</span> ranks[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">26</span>];</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Rank</span><span class="params">(<span class="keyword">char</span> name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1367-二叉树中的列表"><a href="#1367-二叉树中的列表" class="headerlink" title="1367. 二叉树中的列表"></a><a href="https://leetcode-cn.com/problems/linked-list-in-binary-tree/" target="_blank" rel="noopener">1367. 二叉树中的列表</a></h5><h6 id="解题思路-2"><a href="#解题思路-2" class="headerlink" title="解题思路"></a>解题思路</h6><p>枚举下起点然后每个去和链表的去排序，一定要注意剪枝</p>
+<p>或者可以看官方的更容易理解</p>
+<h6 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSubPath</span><span class="params">(ListNode head, TreeNode root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dfs(head, root, head);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// 根据cur 去判断是不是选择开始点去匹配</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(ListNode head, TreeNode root, ListNode cur)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"><span class="comment">// 没有选择</span></span><br><span class="line">        <span class="keyword">if</span> (cur == head) &#123;</span><br><span class="line">          <span class="comment">// 当前树节点和链表节点一样 可以开始 可以不开始</span></span><br><span class="line">            <span class="keyword">if</span> (head.val == root.val) &#123;</span><br><span class="line">              <span class="comment">// 这里如果直接return 就必须把四种情况全部写进去 不然就会只进行两种 </span></span><br><span class="line">              <span class="comment">// 或者 boolean 去记录下</span></span><br><span class="line">                <span class="keyword">return</span> dfs(head, root.left, head.next) || dfs(head, root.right, head.next) || dfs(head, root.left, head) || dfs(head, root.right, head);</span><br><span class="line">            &#125;</span><br><span class="line">          <span class="comment">// 不一样 只能不开始</span></span><br><span class="line">            <span class="keyword">return</span> dfs(head, root.left, head) || dfs(head, root.right, head);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;   <span class="comment">// 已经选了点</span></span><br><span class="line">          <span class="comment">//当前点不一样</span></span><br><span class="line">            <span class="keyword">if</span> (cur.val != root.val) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">          <span class="comment">// 一样继续去匹配</span></span><br><span class="line">            <span class="keyword">return</span> dfs(head, root.right, cur.next) || dfs(head, root.left, cur.next);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 超时方法  </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dfs</span><span class="params">(ListNode head, TreeNode root, ListNode cur)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (cur == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       <span class="keyword">if</span> (root == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (root.val == cur.val) &#123;</span><br><span class="line">           <span class="keyword">if</span> (dfs(head, root.left, cur.next) || dfs(head, root.right, cur.next)) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (head != cur &amp;&amp; root.val == head.val) &#123;</span><br><span class="line">           <span class="keyword">if</span> (dfs(head, root.left, head.next) || dfs(head, root.right, head.next)) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> (dfs(head, root.left, head) || dfs(head, root.right, head)) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">       &#125; <span class="comment">// 每次经过一个点都会去再重新进行一次 最多从父节点到其中子节点3次 每次都会去 dfs(head,this,head)</span></span><br><span class="line">   <span class="comment">// 大量重复</span></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(TreeNode* rt, ListNode* head)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 链表已经全部匹配完，匹配成功</span></span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">// 二叉树访问到了空节点，匹配失败</span></span><br><span class="line">        <span class="keyword">if</span> (rt == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 当前匹配的二叉树上节点的值与链表节点的值不相等，匹配失败</span></span><br><span class="line">        <span class="keyword">if</span> (rt-&gt;val != head-&gt;val) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> dfs(rt-&gt;left, head-&gt;next) || dfs(rt-&gt;right, head-&gt;next);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isSubPath</span><span class="params">(ListNode* head, TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> dfs(root, head) || isSubPath(head, root-&gt;left) || isSubPath(head, root-&gt;right);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">作者：LeetCode-Solution</span><br><span class="line">链接：https:<span class="comment">//leetcode-cn.com/problems/linked-list-in-binary-tree/solution/er-cha-shu-zhong-de-lie-biao-by-leetcode-solution/</span></span><br><span class="line">来源：力扣（LeetCode）</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+<h4 id="1368-使网格图至少有一条有效路径的最小代价"><a href="#1368-使网格图至少有一条有效路径的最小代价" class="headerlink" title="1368. 使网格图至少有一条有效路径的最小代价"></a><a href="https://leetcode-cn.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/" target="_blank" rel="noopener">1368. 使网格图至少有一条有效路径的最小代价</a></h4><h6 id="解题思路-3"><a href="#解题思路-3" class="headerlink" title="解题思路"></a>解题思路</h6><p>0-1bfs 是箭头指的方向那么久不用直接cost相等 不然就是cost + 1</p>
+<h6 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minCost</span><span class="params">(<span class="keyword">int</span>[][] grid)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> xs[] = &#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> ys[] = &#123;<span class="number">0</span>, <span class="number">1</span>, -<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = grid.length, m = grid[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">boolean</span>[][] vis = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][m];</span><br><span class="line"></span><br><span class="line">    Deque&lt;PII&gt; q = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">    q.add(<span class="keyword">new</span> PII(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">0</span> != q.size()) &#123;</span><br><span class="line">        PII pot = q.pollFirst();</span><br><span class="line">        <span class="keyword">if</span> (pot.x == n - <span class="number">1</span> &amp;&amp; pot.y == m - <span class="number">1</span>) <span class="keyword">return</span> pot.cost;</span><br><span class="line">        <span class="keyword">if</span> (vis[pot.x][pot.y]) <span class="keyword">continue</span>;</span><br><span class="line">        vis[pot.x][pot.y] = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">4</span>; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> x = pot.x + xs[i], y = pot.y + ys[i];</span><br><span class="line">            <span class="keyword">if</span> (x &gt;= <span class="number">0</span> &amp;&amp; x &lt; n &amp;&amp; y &gt;= <span class="number">0</span> &amp;&amp; y &lt; m &amp;&amp; !vis[x][y]) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == grid[pot.x][pot.y]) &#123;</span><br><span class="line">                    q.addFirst(<span class="keyword">new</span> PII(x, y, pot.cost));</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    q.addLast(<span class="keyword">new</span> PII(x, y, pot.cost + <span class="number">1</span>));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PII</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> x, y, cost;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PII</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> cost)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.x = x;</span><br><span class="line">        <span class="keyword">this</span>.y = y;</span><br><span class="line">        <span class="keyword">this</span>.cost = cost;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/" data-id="ck7c3g3xf0000xzdp2x5vapu0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/02/Linux%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Linux基础</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/">第178场周赛</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/02/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/01/Leetcode%E6%89%93%E5%8D%A1/">Leetcode打卡</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/23/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">最短路径</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/22/%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">宽度优先搜索</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 chu8aa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>
