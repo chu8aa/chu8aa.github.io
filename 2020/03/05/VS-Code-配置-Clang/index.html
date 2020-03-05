@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>VS Code 配置 Clang | 小z的笔记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境  命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VS Code 配置 Clang">
+<meta property="og:url" content="https://chu8aa.github.io/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/index.html">
+<meta property="og:site_name" content="小z的笔记本">
+<meta property="og:description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境  命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_p">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-05T09:39:13.000Z">
+<meta property="article:modified_time" content="2020-03-05T11:52:36.429Z">
+<meta property="article:author" content="chu8aa">
+<meta property="article:tag" content="vscode">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小z的笔记本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chu8aa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-VS-Code-配置-Clang" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/" class="article-date">
+  <time datetime="2020-03-05T09:39:13.000Z" itemprop="datePublished">2020-03-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      VS Code 配置 Clang
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#前期准备"><span class="post-toc-text">前期准备</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#配置环境变量"><span class="post-toc-text">配置环境变量</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#配置VSCode"><span class="post-toc-text">配置VSCode</span></a></li></ol>
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://code.visualstudio.com/docs/cpp/config-clang-mac" target="_blank" rel="noopener">官方文档</a></p>
+<h5 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h5><ul>
+<li>安装 <a href="https://code.visualstudio.com/download" target="_blank" rel="noopener">Visual Studio Code</a></li>
+<li>安装 <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools" target="_blank" rel="noopener">C++ extension for VS Code</a>.</li>
+</ul>
+<h5 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h5><ul>
+<li>命令面板 <strong>Shell Command: Install ‘code’ command in PATH</strong>.</li>
+</ul>
+<h5 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h5><ul>
+<li><p>创建编译环境</p>
+<ul>
+<li><p>命令面板 <strong>C/C++:Edit Configurations (UI)</strong> 配置一下 会生成 .vscode/c_cpp_properties.json</p>
+</li>
+<li> <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"configurations"</span>: [</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"macOS"</span>,</span><br><span class="line">  <span class="attr">"includePath"</span>: [<span class="string">"$&#123;workspaceFolder&#125;/**"</span>],</span><br><span class="line">  <span class="attr">"defines"</span>: [],</span><br><span class="line">  <span class="attr">"macFrameworkPath"</span>: [<span class="string">"/System/Library/Frameworks"</span>, <span class="string">"/Library/Frameworks"</span>],</span><br><span class="line">  <span class="attr">"compilerPath"</span>: <span class="string">"/usr/bin/clang"</span>,</span><br><span class="line">  <span class="attr">"cStandard"</span>: <span class="string">"c11"</span>,</span><br><span class="line">  <span class="attr">"cppStandard"</span>: <span class="string">"c++17"</span>,</span><br><span class="line">  <span class="attr">"intelliSenseMode"</span>: <span class="string">"$&#123;default&#125;"</span></span><br><span class="line">&#125;</span><br><span class="line">],</span><br><span class="line"><span class="attr">"version"</span>: <span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>Compiler path</strong> 一般走命令面板会帮你配置好 </p>
+</li>
+<li><p>Set <strong>IntelliSense mode</strong> to <code>${default}</code>, which on macOS is <code>clang-x64</code>.</p>
+</li>
+<li><p>You only need to modify the <strong>Include path</strong> setting if your program includes header files that are not in your workspace or in the standard library path. 所以这个一般不动</p>
+</li>
+<li><p>On macOS, you must set the <code>macFrameworkPath</code> to point to the system header files. 这个一定要设置 ，macOS 一般在这”/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks” </p>
+</li>
+<li><p>```json<br> {</p>
+<pre><code> &quot;configurations&quot;: [
+     {
+         &quot;name&quot;: &quot;Mac&quot;,
+         &quot;includePath&quot;: [
+             &quot;${workspaceFolder}/**&quot;
+         ],
+         &quot;defines&quot;: [],
+         &quot;macFrameworkPath&quot;: [
+              &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks&quot;
+         ],
+         &quot;compilerPath&quot;: &quot;/usr/bin/clang&quot;,
+         &quot;cStandard&quot;: &quot;c11&quot;,
+         &quot;cppStandard&quot;: &quot;c++17&quot;,
+         &quot;intelliSenseMode&quot;: &quot;clang-x64&quot;
+     }
+ ],
+ &quot;version&quot;: 4
+</code></pre><p> }</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 配置构建任务</span><br><span class="line"></span><br><span class="line">  - 命令面板 **Create tasks.json file from template**,选择**Create tasks.json file from template**选择**Others**生成.vscode&#x2F;tasks.json</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;json</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;version&quot;: &quot;2.0.0&quot;,</span><br><span class="line">      &quot;tasks&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;label&quot;: &quot;Build with Clang&quot;,</span><br><span class="line">          &quot;type&quot;: &quot;shell&quot;,</span><br><span class="line">          &quot;command&quot;: &quot;clang++&quot;,</span><br><span class="line">          &quot;args&quot;: [</span><br><span class="line">            &quot;-std&#x3D;c++17&quot;,</span><br><span class="line">            &quot;-stdlib&#x3D;libc++&quot;,</span><br><span class="line">            &quot;helloworld.cpp&quot;,</span><br><span class="line">            &quot;-o&quot;,</span><br><span class="line">            &quot;helloworld.out&quot;,</span><br><span class="line">            &quot;--debug&quot;</span><br><span class="line">          ],</span><br><span class="line">          &quot;group&quot;: &#123;</span><br><span class="line">            &quot;kind&quot;: &quot;build&quot;,</span><br><span class="line">            &quot;isDefault&quot;: true</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>```json<br>{</p>
+<pre><code>&quot;version&quot;: &quot;2.0.0&quot;,
+&quot;tasks&quot;: [
+  {
+    &quot;label&quot;: &quot;Build with Clang&quot;,
+    &quot;type&quot;: &quot;shell&quot;,
+    &quot;command&quot;: &quot;clang++&quot;,
+    &quot;args&quot;: [
+      &quot;-std=c++17&quot;,
+      &quot;-stdlib=libc++&quot;,
+      &quot;helloworld.cpp&quot;,
+      &quot;-o&quot;,
+      &quot;helloworld.out&quot;,
+      &quot;--debug&quot;
+    ],
+    &quot;group&quot;: {
+      &quot;kind&quot;: &quot;build&quot;,
+      &quot;isDefault&quot;: true
+    },
+    &quot;presentation&quot;: {
+      &quot;panel&quot;: &quot;new&quot;
+    }
+  }
+]
+</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 新加的 panel 是因为出现端口占用</span><br><span class="line"></span><br><span class="line">- 配置调试设置</span><br><span class="line"></span><br><span class="line">  - From the Command Palette, type &quot;launch&quot; and then choose **Debug: Open launch.json**. Next, choose the **GDB&#x2F;LLDB** environment.</span><br><span class="line"></span><br><span class="line">  - For &#96;program&#96;, use the program name &#96;$&#123;workspaceFolder&#125;&#x2F;helloworld.out&#96; (which matches what you specified in &#96;tasks.json&#96;).</span><br><span class="line"></span><br><span class="line">  - stopAtEntry &#x3D; true 表示在开头设置了一个断点</span><br><span class="line"></span><br><span class="line">  - Set &#96;externalConsole&#96; to &#96;true&#96; to display the program output in an external Terminal window. (Currently on Mac the output cannot be directed to the integrated Terminal window.)</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;json</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">      &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;name&quot;: &quot;(lldb) Launch&quot;,</span><br><span class="line">          &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">          &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">          &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;&#x2F;helloworld.out&quot;,</span><br><span class="line">          &quot;args&quot;: [],</span><br><span class="line">          &quot;stopAtEntry&quot;: true,</span><br><span class="line">          &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">          &quot;environment&quot;: [],</span><br><span class="line">          &quot;externalConsole&quot;: true,</span><br><span class="line">          &quot;MIMode&quot;: &quot;lldb&quot;,</span><br><span class="line">          &quot;logging&quot;: </span><br><span class="line">            &quot;trace&quot;: true,</span><br><span class="line">            &quot;traceResponse&quot;: true,</span><br><span class="line">            &quot;engineLogging&quot;: true</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><pre><code class="lang-json">{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    &quot;version&quot;: &quot;0.2.0&quot;,
+    &quot;configurations&quot;: [
+        {
+            &quot;name&quot;: &quot;(lldb) 启动&quot;,
+            &quot;type&quot;: &quot;cppdbg&quot;,
+            &quot;request&quot;: &quot;launch&quot;,
+            &quot;program&quot;: &quot;${workspaceFolder}/helloworld.out&quot;,
+            &quot;args&quot;: [],
+            &quot;stopAtEntry&quot;: false,
+            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
+            &quot;environment&quot;: [],
+            &quot;externalConsole&quot;: false,
+            &quot;MIMode&quot;: &quot;lldb&quot;
+        }
+    ]
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/" data-id="ck7etuonh0000hhdp66wqd11x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">第178场周赛</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/%E7%AE%97%E6%B3%95/">算法</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/">VS Code 配置 Clang</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/03/%E7%AC%AC178%E5%9C%BA%E5%91%A8%E8%B5%9B/">第178场周赛</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/02/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/01/Leetcode%E6%89%93%E5%8D%A1/">Leetcode打卡</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/23/%E6%9C%80%E7%9F%AD%E8%B7%AF%E5%BE%84/">最短路径</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 chu8aa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
