@@ -5,17 +5,17 @@
   
 
   
-  <title>VS Code 配置 Clang | 小z的笔记本</title>
+  <title>VS-Code-配置-Clang | 小z的笔记本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境  命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_p">
+  <meta name="description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境 命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="VS Code 配置 Clang">
+<meta property="og:title" content="VS-Code-配置-Clang">
 <meta property="og:url" content="https://chu8aa.github.io/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/index.html">
 <meta property="og:site_name" content="小z的笔记本">
-<meta property="og:description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境  命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_p">
+<meta property="og:description" content="官方文档 前期准备 安装 Visual Studio Code 安装 C++ extension for VS Code.  配置环境变量 命令面板 Shell Command: Install ‘code’ command in PATH.  配置VSCode 创建编译环境 命令面板 C&#x2F;C++:Edit Configurations (UI) 配置一下 会生成 .vscode&#x2F;c_cpp_pr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-05T09:39:13.000Z">
-<meta property="article:modified_time" content="2020-03-05T11:52:36.429Z">
+<meta property="article:modified_time" content="2020-03-10T04:44:06.269Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="vscode">
 <meta name="twitter:card" content="summary">
@@ -84,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      VS Code 配置 Clang
+      VS-Code-配置-Clang
     </h1>
   
 
@@ -105,89 +105,39 @@
 <li>命令面板 <strong>Shell Command: Install ‘code’ command in PATH</strong>.</li>
 </ul>
 <h5 id="配置VSCode"><a href="#配置VSCode" class="headerlink" title="配置VSCode"></a>配置VSCode</h5><ul>
-<li><p>创建编译环境</p>
+<li>创建编译环境<ul>
+<li>命令面板 <strong>C/C++:Edit Configurations (UI)</strong> 配置一下 会生成 .vscode/c_cpp_properties.json</li>
+<li><strong>Compiler path</strong> 一般走命令面板会帮你配置好 </li>
+<li>Set <strong>IntelliSense mode</strong> to <code>${default}</code>, which on macOS is <code>clang-x64</code>.</li>
+<li>You only need to modify the <strong>Include path</strong> setting if your program includes header files that are not in your workspace or in the standard library path. 所以这个一般不动</li>
+<li>On macOS, you must set the <code>macFrameworkPath</code> to point to the system header files. 这个一定要设置 ，macOS 一般在这”/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks” </li>
+</ul>
+</li>
+</ul>
+<pre><code> <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">  &#123;</span><br><span class="line"><span class="attr">"configurations"</span>: [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"macOS"</span>,</span><br><span class="line">    <span class="attr">"includePath"</span>: [<span class="string">"$&#123;workspaceFolder&#125;/**"</span>],</span><br><span class="line">    <span class="attr">"defines"</span>: [],</span><br><span class="line">    <span class="attr">"macFrameworkPath"</span>: [<span class="string">"/System/Library/Frameworks"</span>, <span class="string">"/Library/Frameworks"</span>],</span><br><span class="line">    <span class="attr">"compilerPath"</span>: <span class="string">"/usr/bin/clang"</span>,</span><br><span class="line">    <span class="attr">"cStandard"</span>: <span class="string">"c11"</span>,</span><br><span class="line">    <span class="attr">"cppStandard"</span>: <span class="string">"c++17"</span>,</span><br><span class="line">    <span class="attr">"intelliSenseMode"</span>: <span class="string">"$&#123;default&#125;"</span></span><br><span class="line">  &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"version"</span>: <span class="number">4</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</code></pre>   <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Mac"</span>,</span><br><span class="line">            <span class="attr">"includePath"</span>: [</span><br><span class="line">                <span class="string">"$&#123;workspaceFolder&#125;/**"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"defines"</span>: [],</span><br><span class="line">            <span class="attr">"macFrameworkPath"</span>: [</span><br><span class="line">	             <span class="string">"/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">"compilerPath"</span>: <span class="string">"/usr/bin/clang"</span>,</span><br><span class="line">            <span class="attr">"cStandard"</span>: <span class="string">"c11"</span>,</span><br><span class="line">            <span class="attr">"cppStandard"</span>: <span class="string">"c++17"</span>,</span><br><span class="line">            <span class="attr">"intelliSenseMode"</span>: <span class="string">"clang-x64"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"version"</span>: <span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><p>命令面板 <strong>C/C++:Edit Configurations (UI)</strong> 配置一下 会生成 .vscode/c_cpp_properties.json</p>
+<li><p>配置构建任务</p>
+<ul>
+<li><p>命令面板 <strong>Create tasks.json file from template</strong>,选择<strong>Create tasks.json file from template</strong>选择<strong>Others</strong>生成.vscode/tasks.json</p>
 </li>
-<li> <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"configurations"</span>: [</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"macOS"</span>,</span><br><span class="line">  <span class="attr">"includePath"</span>: [<span class="string">"$&#123;workspaceFolder&#125;/**"</span>],</span><br><span class="line">  <span class="attr">"defines"</span>: [],</span><br><span class="line">  <span class="attr">"macFrameworkPath"</span>: [<span class="string">"/System/Library/Frameworks"</span>, <span class="string">"/Library/Frameworks"</span>],</span><br><span class="line">  <span class="attr">"compilerPath"</span>: <span class="string">"/usr/bin/clang"</span>,</span><br><span class="line">  <span class="attr">"cStandard"</span>: <span class="string">"c11"</span>,</span><br><span class="line">  <span class="attr">"cppStandard"</span>: <span class="string">"c++17"</span>,</span><br><span class="line">  <span class="attr">"intelliSenseMode"</span>: <span class="string">"$&#123;default&#125;"</span></span><br><span class="line">&#125;</span><br><span class="line">],</span><br><span class="line"><span class="attr">"version"</span>: <span class="number">4</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>新加的 panel 是因为出现端口占用</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</span><br><span class="line">  <span class="attr">"tasks"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"label"</span>: <span class="string">"Build with Clang"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"shell"</span>,</span><br><span class="line">      <span class="attr">"command"</span>: <span class="string">"clang++"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: [</span><br><span class="line">        <span class="string">"-std=c++17"</span>,</span><br><span class="line">        <span class="string">"-stdlib=libc++"</span>,</span><br><span class="line">        <span class="string">"helloworld.cpp"</span>,</span><br><span class="line">        <span class="string">"-o"</span>,</span><br><span class="line">        <span class="string">"helloworld.out"</span>,</span><br><span class="line">        <span class="string">"--debug"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"group"</span>: &#123;</span><br><span class="line">        <span class="attr">"kind"</span>: <span class="string">"build"</span>,</span><br><span class="line">        <span class="attr">"isDefault"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"2.0.0"</span>,</span><br><span class="line">    <span class="attr">"tasks"</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">"label"</span>: <span class="string">"Build with Clang"</span>,</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"shell"</span>,</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"clang++"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">          <span class="string">"-std=c++17"</span>,</span><br><span class="line">          <span class="string">"-stdlib=libc++"</span>,</span><br><span class="line">          <span class="string">"helloworld.cpp"</span>,</span><br><span class="line">          <span class="string">"-o"</span>,</span><br><span class="line">          <span class="string">"helloworld.out"</span>,</span><br><span class="line">          <span class="string">"--debug"</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">"group"</span>: &#123;</span><br><span class="line">          <span class="attr">"kind"</span>: <span class="string">"build"</span>,</span><br><span class="line">          <span class="attr">"isDefault"</span>: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"presentation"</span>: &#123;</span><br><span class="line">          <span class="attr">"panel"</span>: <span class="string">"new"</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong>Compiler path</strong> 一般走命令面板会帮你配置好 </p>
+</ul>
 </li>
-<li><p>Set <strong>IntelliSense mode</strong> to <code>${default}</code>, which on macOS is <code>clang-x64</code>.</p>
+<li><p>配置调试设置</p>
+<ul>
+<li><p>From the Command Palette, type “launch” and then choose <strong>Debug: Open launch.json</strong>. Next, choose the <strong>GDB/LLDB</strong> environment.</p>
 </li>
-<li><p>You only need to modify the <strong>Include path</strong> setting if your program includes header files that are not in your workspace or in the standard library path. 所以这个一般不动</p>
+<li><p>For <code>program</code>, use the program name <code>${workspaceFolder}/helloworld.out</code> (which matches what you specified in <code>tasks.json</code>).</p>
 </li>
-<li><p>On macOS, you must set the <code>macFrameworkPath</code> to point to the system header files. 这个一定要设置 ，macOS 一般在这”/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks” </p>
+<li><p>stopAtEntry = true 表示在开头设置了一个断点</p>
 </li>
-<li><p>```json<br> {</p>
-<pre><code> &quot;configurations&quot;: [
-     {
-         &quot;name&quot;: &quot;Mac&quot;,
-         &quot;includePath&quot;: [
-             &quot;${workspaceFolder}/**&quot;
-         ],
-         &quot;defines&quot;: [],
-         &quot;macFrameworkPath&quot;: [
-              &quot;/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks&quot;
-         ],
-         &quot;compilerPath&quot;: &quot;/usr/bin/clang&quot;,
-         &quot;cStandard&quot;: &quot;c11&quot;,
-         &quot;cppStandard&quot;: &quot;c++17&quot;,
-         &quot;intelliSenseMode&quot;: &quot;clang-x64&quot;
-     }
- ],
- &quot;version&quot;: 4
-</code></pre><p> }</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 配置构建任务</span><br><span class="line"></span><br><span class="line">  - 命令面板 **Create tasks.json file from template**,选择**Create tasks.json file from template**选择**Others**生成.vscode&#x2F;tasks.json</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;json</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;version&quot;: &quot;2.0.0&quot;,</span><br><span class="line">      &quot;tasks&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;label&quot;: &quot;Build with Clang&quot;,</span><br><span class="line">          &quot;type&quot;: &quot;shell&quot;,</span><br><span class="line">          &quot;command&quot;: &quot;clang++&quot;,</span><br><span class="line">          &quot;args&quot;: [</span><br><span class="line">            &quot;-std&#x3D;c++17&quot;,</span><br><span class="line">            &quot;-stdlib&#x3D;libc++&quot;,</span><br><span class="line">            &quot;helloworld.cpp&quot;,</span><br><span class="line">            &quot;-o&quot;,</span><br><span class="line">            &quot;helloworld.out&quot;,</span><br><span class="line">            &quot;--debug&quot;</span><br><span class="line">          ],</span><br><span class="line">          &quot;group&quot;: &#123;</span><br><span class="line">            &quot;kind&quot;: &quot;build&quot;,</span><br><span class="line">            &quot;isDefault&quot;: true</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>```json<br>{</p>
-<pre><code>&quot;version&quot;: &quot;2.0.0&quot;,
-&quot;tasks&quot;: [
-  {
-    &quot;label&quot;: &quot;Build with Clang&quot;,
-    &quot;type&quot;: &quot;shell&quot;,
-    &quot;command&quot;: &quot;clang++&quot;,
-    &quot;args&quot;: [
-      &quot;-std=c++17&quot;,
-      &quot;-stdlib=libc++&quot;,
-      &quot;helloworld.cpp&quot;,
-      &quot;-o&quot;,
-      &quot;helloworld.out&quot;,
-      &quot;--debug&quot;
-    ],
-    &quot;group&quot;: {
-      &quot;kind&quot;: &quot;build&quot;,
-      &quot;isDefault&quot;: true
-    },
-    &quot;presentation&quot;: {
-      &quot;panel&quot;: &quot;new&quot;
-    }
-  }
-]
-</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 新加的 panel 是因为出现端口占用</span><br><span class="line"></span><br><span class="line">- 配置调试设置</span><br><span class="line"></span><br><span class="line">  - From the Command Palette, type &quot;launch&quot; and then choose **Debug: Open launch.json**. Next, choose the **GDB&#x2F;LLDB** environment.</span><br><span class="line"></span><br><span class="line">  - For &#96;program&#96;, use the program name &#96;$&#123;workspaceFolder&#125;&#x2F;helloworld.out&#96; (which matches what you specified in &#96;tasks.json&#96;).</span><br><span class="line"></span><br><span class="line">  - stopAtEntry &#x3D; true 表示在开头设置了一个断点</span><br><span class="line"></span><br><span class="line">  - Set &#96;externalConsole&#96; to &#96;true&#96; to display the program output in an external Terminal window. (Currently on Mac the output cannot be directed to the integrated Terminal window.)</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;json</span><br><span class="line">    &#123;</span><br><span class="line">      &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">      &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;name&quot;: &quot;(lldb) Launch&quot;,</span><br><span class="line">          &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">          &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">          &quot;program&quot;: &quot;$&#123;workspaceFolder&#125;&#x2F;helloworld.out&quot;,</span><br><span class="line">          &quot;args&quot;: [],</span><br><span class="line">          &quot;stopAtEntry&quot;: true,</span><br><span class="line">          &quot;cwd&quot;: &quot;$&#123;workspaceFolder&#125;&quot;,</span><br><span class="line">          &quot;environment&quot;: [],</span><br><span class="line">          &quot;externalConsole&quot;: true,</span><br><span class="line">          &quot;MIMode&quot;: &quot;lldb&quot;,</span><br><span class="line">          &quot;logging&quot;: </span><br><span class="line">            &quot;trace&quot;: true,</span><br><span class="line">            &quot;traceResponse&quot;: true,</span><br><span class="line">            &quot;engineLogging&quot;: true</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><pre><code class="lang-json">{
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    &quot;version&quot;: &quot;0.2.0&quot;,
-    &quot;configurations&quot;: [
-        {
-            &quot;name&quot;: &quot;(lldb) 启动&quot;,
-            &quot;type&quot;: &quot;cppdbg&quot;,
-            &quot;request&quot;: &quot;launch&quot;,
-            &quot;program&quot;: &quot;${workspaceFolder}/helloworld.out&quot;,
-            &quot;args&quot;: [],
-            &quot;stopAtEntry&quot;: false,
-            &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
-            &quot;environment&quot;: [],
-            &quot;externalConsole&quot;: false,
-            &quot;MIMode&quot;: &quot;lldb&quot;
-        }
-    ]
-}
-</code></pre>
+<li><p>Set <code>externalConsole</code> to <code>true</code> to display the program output in an external Terminal window. (Currently on Mac the output cannot be directed to the integrated Terminal window.)</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"(lldb) Launch"</span>,</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/helloworld.out"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: [],</span><br><span class="line">      <span class="attr">"stopAtEntry"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">      <span class="attr">"environment"</span>: [],</span><br><span class="line">      <span class="attr">"externalConsole"</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">"MIMode"</span>: <span class="string">"lldb"</span>,</span><br><span class="line">      <span class="attr">"logging"</span>: </span><br><span class="line">        <span class="string">"trace"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"traceResponse"</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">"engineLogging"</span>: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 使用 IntelliSense 了解相关属性。 </span></span><br><span class="line">    <span class="comment">// 悬停以查看现有属性的描述。</span></span><br><span class="line">    <span class="comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span></span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"(lldb) 启动"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"cppdbg"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"program"</span>: <span class="string">"$&#123;workspaceFolder&#125;/helloworld.out"</span>,</span><br><span class="line">            <span class="attr">"args"</span>: [],</span><br><span class="line">            <span class="attr">"stopAtEntry"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;"</span>,</span><br><span class="line">            <span class="attr">"environment"</span>: [],</span><br><span class="line">            <span class="attr">"externalConsole"</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">"MIMode"</span>: <span class="string">"lldb"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -282,7 +232,7 @@
           </li>
         
           <li>
-            <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/">VS Code 配置 Clang</a>
+            <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/">VS-Code-配置-Clang</a>
           </li>
         
           <li>

@@ -15,7 +15,7 @@
 <meta property="og:description" content="Linux版本 内核版本 主版本号，次版本号，末版本号 次版本号奇数是开发版，偶数是稳定版   发行版本 RedHat Enterprise Linux Fedora CentOS Debian Ubuntu    帮助命令 man manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么 man 1 ls 一般情况下 1是省略的 man -a passwd">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-02T09:39:39.000Z">
-<meta property="article:modified_time" content="2020-03-02T11:36:00.963Z">
+<meta property="article:modified_time" content="2020-03-10T03:47:58.323Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -132,7 +132,7 @@
 </li>
 </ul>
 <h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
-<li>ls<ul>
+<li>ls <strong>可追加</strong><ul>
 <li>/ 是 根目录 /root 是 root 用户的家目录</li>
 <li>/opt 是绝对路径 ./opt 相对路径 ../opt 也是相对路径 opt也是相对路径</li>
 <li>可以追加文件 ls / /root  (/ 和 /root 之间一定要有空格多个无所谓</li>
@@ -169,6 +169,32 @@
 <li>cd<ul>
 <li>shell 提供的补全功能 Tab键</li>
 <li>cd - 返回上一次呆的路径</li>
+</ul>
+</li>
+<li>mkdir  <strong>可以追加</strong><ul>
+<li>建立目录</li>
+<li>-p 建立多级目录</li>
+</ul>
+</li>
+<li>rmdir   <strong>可以追加</strong><ul>
+<li>删除一个空目录</li>
+<li>-p 一定要注意和rm 不同 rmkdir -p a/b/c</li>
+<li>一定要记住 everything is file</li>
+</ul>
+</li>
+<li>rm  <strong>可以追加</strong><ul>
+<li>删除一个文件或者目录</li>
+<li>-r 递归删除  rm -r a</li>
+<li>-f 不带提示</li>
+</ul>
+</li>
+<li>cp<ul>
+<li>复制文件或者目录</li>
+<li>-r 递归复制 才复制目录及下面的文件 不然的话只能复制文件 对一些特殊文件会做未声明处理</li>
+<li>-R 递归复制 对特殊文件直接原样复制</li>
+<li>-v 显示从哪到哪</li>
+<li>-p 保留用户、权限、时间等文件属性</li>
+<li>-a 等同于 -dpR</li>
 </ul>
 </li>
 </ul>
@@ -262,7 +288,7 @@
           </li>
         
           <li>
-            <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/">VS Code 配置 Clang</a>
+            <a href="/2020/03/05/VS-Code-%E9%85%8D%E7%BD%AE-Clang/">VS-Code-配置-Clang</a>
           </li>
         
           <li>
