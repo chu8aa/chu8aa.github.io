@@ -7,15 +7,15 @@
   
   <title>Linux基础 | 小z的笔记本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Linux版本 内核版本 主版本号，次版本号，末版本号 次版本号奇数是开发版，偶数是稳定版   发行版本 RedHat Enterprise Linux Fedora CentOS Debian Ubuntu    帮助命令 man manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么 man 1 ls 一般情况下 1是省略的 man -a passwd">
+  <meta name="description" content="Linux版本 内核版本 主版本号，次版本号，末版本号 次版本号奇数是开发版，偶数是稳定版   发行版本 RedHat Enterprise Linux Fedora CentOS Debian Ubuntu    帮助命令man manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么 man 1 ls 一般情况下 1是省略的 man -a passwd 可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux基础">
 <meta property="og:url" content="https://chu8aa.github.io/2020/03/02/Linux%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="小z的笔记本">
-<meta property="og:description" content="Linux版本 内核版本 主版本号，次版本号，末版本号 次版本号奇数是开发版，偶数是稳定版   发行版本 RedHat Enterprise Linux Fedora CentOS Debian Ubuntu    帮助命令 man manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么 man 1 ls 一般情况下 1是省略的 man -a passwd">
+<meta property="og:description" content="Linux版本 内核版本 主版本号，次版本号，末版本号 次版本号奇数是开发版，偶数是稳定版   发行版本 RedHat Enterprise Linux Fedora CentOS Debian Ubuntu    帮助命令man manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么 man 1 ls 一般情况下 1是省略的 man -a passwd 可">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-02T09:39:39.000Z">
-<meta property="article:modified_time" content="2020-03-10T03:47:58.323Z">
+<meta property="article:modified_time" content="2020-03-18T02:01:53.365Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -91,7 +91,7 @@
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Linux版本"><span class="post-toc-text">Linux版本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#帮助命令"><span class="post-toc-text">帮助命令</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#常用命令"><span class="post-toc-text">常用命令</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#Linux版本"><span class="post-toc-text">Linux版本</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#帮助命令"><span class="post-toc-text">帮助命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#man"><span class="post-toc-text">man</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#help"><span class="post-toc-text">help</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#info"><span class="post-toc-text">info</span></a></li></ol></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#常用命令"><span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#ls-可追加"><span class="post-toc-text">ls 可追加</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#pwd"><span class="post-toc-text">pwd</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#clear"><span class="post-toc-text">clear</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#cd"><span class="post-toc-text">cd</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#mkdir-可以追加"><span class="post-toc-text">mkdir  可以追加</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#rmdir-可以追加"><span class="post-toc-text">rmdir   可以追加</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#rm-可以追加"><span class="post-toc-text">rm  可以追加</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#cp"><span class="post-toc-text">cp</span></a></li></ol></li></ol>
     </div>
 
     <div class="article-entry" itemprop="articleBody">
@@ -111,28 +111,18 @@
 </ul>
 </li>
 </ul>
-<h5 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h5><ul>
-<li>man<ul>
+<h5 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h5><h6 id="man"><a href="#man" class="headerlink" title="man"></a>man</h6><ul>
 <li>manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么</li>
 <li>man 1 ls 一般情况下 1是省略的</li>
-<li>man -a passwd 可以查看不同章节重复的名利</li>
-</ul>
-</li>
-<li>help<ul>
+<li>man -a passwd 可以查看不同章节重复的名利<h6 id="help"><a href="#help" class="headerlink" title="help"></a>help</h6></li>
 <li>shell 命令解释器自带的称为内部命令 其他是外部命令</li>
 <li>内部命令 help cd</li>
 <li>外部命令 ls —help</li>
-<li>可以用 type cd 来看是什么类型命令</li>
-</ul>
-</li>
-<li>info<ul>
+<li>可以用 type cd 来看是什么类型命令<h6 id="info"><a href="#info" class="headerlink" title="info"></a>info</h6></li>
 <li>info 帮助比 help 更详细，作为 help 的补充</li>
 <li>info ls</li>
 </ul>
-</li>
-</ul>
-<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><ul>
-<li>ls <strong>可追加</strong><ul>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><h6 id="ls-可追加"><a href="#ls-可追加" class="headerlink" title="ls 可追加"></a>ls <strong>可追加</strong></h6><ul>
 <li>/ 是 根目录 /root 是 root 用户的家目录</li>
 <li>/opt 是绝对路径 ./opt 相对路径 ../opt 也是相对路径 opt也是相对路径</li>
 <li>可以追加文件 ls / /root  (/ 和 /root 之间一定要有空格多个无所谓</li>
@@ -154,49 +144,26 @@
 <li>ls -r 逆序</li>
 <li>ls -t 时间</li>
 <li>ls -l -r -t == ls -lrt == ls -ltr 顺序无关</li>
-<li>ls -R 递归查看下面的全部文件</li>
-</ul>
-</li>
-<li>pwd <ul>
-<li>查看路径</li>
-</ul>
-</li>
-<li>clear<ul>
+<li>ls -R 递归查看下面的全部文件<h6 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h6></li>
+<li>查看路径<h6 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h6></li>
 <li>清空终端</li>
-<li>快捷键 control + l</li>
-</ul>
-</li>
-<li>cd<ul>
+<li>快捷键 control + l<h6 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h6></li>
 <li>shell 提供的补全功能 Tab键</li>
-<li>cd - 返回上一次呆的路径</li>
-</ul>
-</li>
-<li>mkdir  <strong>可以追加</strong><ul>
+<li>cd - 返回上一次呆的路径<h6 id="mkdir-可以追加"><a href="#mkdir-可以追加" class="headerlink" title="mkdir  可以追加"></a>mkdir  <strong>可以追加</strong></h6></li>
 <li>建立目录</li>
-<li>-p 建立多级目录</li>
-</ul>
-</li>
-<li>rmdir   <strong>可以追加</strong><ul>
+<li>-p 建立多级目录<h6 id="rmdir-可以追加"><a href="#rmdir-可以追加" class="headerlink" title="rmdir   可以追加"></a>rmdir   <strong>可以追加</strong></h6></li>
 <li>删除一个空目录</li>
 <li>-p 一定要注意和rm 不同 rmkdir -p a/b/c</li>
-<li>一定要记住 everything is file</li>
-</ul>
-</li>
-<li>rm  <strong>可以追加</strong><ul>
+<li>一定要记住 everything is file<h6 id="rm-可以追加"><a href="#rm-可以追加" class="headerlink" title="rm  可以追加"></a>rm  <strong>可以追加</strong></h6></li>
 <li>删除一个文件或者目录</li>
 <li>-r 递归删除  rm -r a</li>
-<li>-f 不带提示</li>
-</ul>
-</li>
-<li>cp<ul>
+<li>-f 不带提示<h6 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h6></li>
 <li>复制文件或者目录</li>
 <li>-r 递归复制 才复制目录及下面的文件 不然的话只能复制文件 对一些特殊文件会做未声明处理</li>
 <li>-R 递归复制 对特殊文件直接原样复制</li>
 <li>-v 显示从哪到哪</li>
 <li>-p 保留用户、权限、时间等文件属性</li>
 <li>-a 等同于 -dpR</li>
-</ul>
-</li>
 </ul>
 
       
