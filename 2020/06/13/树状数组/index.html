@@ -5,19 +5,19 @@
   
 
   
-  <title>快速幂 | 小z的笔记本</title>
+  <title>树状数组 | 小z的笔记本</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="快速幂1234567891011private static int qmi(int a, int b, int p) &amp;#123;    int res &#x3D; 1;    while (b !&#x3D; 0) &amp;#123;        if ((b &amp; 1) !&#x3D; 0) &amp;#123;            res &#x3D; (int) (((long)res * a) % p);        &amp;#1">
+  <meta name="description" content="基本 又名二进制索引树 (Binary indexed tree) 分级管理系统 成员 a[1], a[2]…… 管理小组 c[1], c[2]…… 根据下标来规定每个管理小组管理的范围  i 的二进制 结尾有几个连续的 0 就是从下标开始向前几个位置 lowbit(x) &#x3D; x &amp; (-x)   直接前驱 一个 c[i - lowbit(i)] 一个点和他的直接后继可能同一个直接前驱 5">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速幂">
-<meta property="og:url" content="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/index.html">
+<meta property="og:title" content="树状数组">
+<meta property="og:url" content="https://chu8aa.github.io/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="小z的笔记本">
-<meta property="og:description" content="快速幂1234567891011private static int qmi(int a, int b, int p) &amp;#123;    int res &#x3D; 1;    while (b !&#x3D; 0) &amp;#123;        if ((b &amp; 1) !&#x3D; 0) &amp;#123;            res &#x3D; (int) (((long)res * a) % p);        &amp;#1">
+<meta property="og:description" content="基本 又名二进制索引树 (Binary indexed tree) 分级管理系统 成员 a[1], a[2]…… 管理小组 c[1], c[2]…… 根据下标来规定每个管理小组管理的范围  i 的二进制 结尾有几个连续的 0 就是从下标开始向前几个位置 lowbit(x) &#x3D; x &amp; (-x)   直接前驱 一个 c[i - lowbit(i)] 一个点和他的直接后继可能同一个直接前驱 5">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-02-03T04:32:48.000Z">
-<meta property="article:modified_time" content="2020-03-31T06:53:17.751Z">
+<meta property="article:published_time" content="2020-06-13T08:13:51.000Z">
+<meta property="article:modified_time" content="2020-06-13T08:46:36.216Z">
 <meta property="article:author" content="chu8aa">
-<meta property="article:tag" content="数学">
+<meta property="article:tag" content="数据结构3">
 <meta name="twitter:card" content="summary">
   
   
@@ -63,13 +63,13 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-快速幂" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-树状数组" class="article article-type-post" itemscope itemprop="blogPost">
 
 
 
   <div class="article-meta">
-    <a href="/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" class="article-date">
-  <time datetime="2020-02-03T04:32:48.000Z" itemprop="datePublished">2020-02-03</time>
+    <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" class="article-date">
+  <time datetime="2020-06-13T08:13:51.000Z" itemprop="datePublished">2020-06-13</time>
 </a>
     
   <div class="article-category">
@@ -84,52 +84,93 @@
         
   
     <h1 class="article-title" itemprop="name">
-      快速幂
+      树状数组
     </h1>
   
 
       </header>
     
     <div class="article-entry" itemprop="articleBody">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#快速幂"><span class="post-toc-text">快速幂</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#快速幂求乘法逆元"><span class="post-toc-text">快速幂求乘法逆元</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本"><span class="post-toc-text">基本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#例题"><span class="post-toc-text">例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ2352"><span class="post-toc-text">POJ2352</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ3067"><span class="post-toc-text">POJ3067</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ1195"><span class="post-toc-text">POJ1195</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ3321"><span class="post-toc-text">POJ3321</span></a></li></ol></li></ol>
     </div>
 
     <div class="article-entry" itemprop="articleBody">
       
-        <h5 id="快速幂"><a href="#快速幂" class="headerlink" title="快速幂"></a>快速幂</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)res * a) % p);</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) (((<span class="keyword">long</span>)a * a) % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<script type="math/tex; mode=display">
-a = x_1 *a^{2^0} * x_2 *a^{2^1} ...x_{logb}* a^{2^{logb}}</script><script type="math/tex; mode=display">
-a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
-(a^{2^0})^2 = a^{2^1} ...</script><p>就是 b 可以 根据 二进制分解 <script type="math/tex">(5)_{10} = (101)_2</script></p>
-<script type="math/tex; mode=display">5 = 2^0 + 2^2</script><h5 id="快速幂求乘法逆元"><a href="#快速幂求乘法逆元" class="headerlink" title="快速幂求乘法逆元"></a>快速幂求乘法逆元</h5><blockquote>
-<p>乘法逆元就是 $ \frac{a}{b} \equiv a \star b^{-1}  (\mod m) $ 即$b^{-1}$ 称作$b$ 模$m$ 的逆元 </p>
-<p>$b$ 逆元的充分必要条件是  $b$与 $m$ 互质 当$m$ 为质数的时候 $b^{m-2}$ 就是$b$的逆元</p>
-<p>其中 $ b|a $  ，$ b $ 与 $m $ 互质</p>
-<p>且 $m$是质数</p>
-<p>$ b \star \frac {a} {b} \equiv a \star b^{-1} \star b (\mod m)$</p>
-<p>$ a \equiv a * b ^{-1} \star b (\mod m) $</p>
-<p>$1 \equiv b^{-1} \star b (\mod m)$</p>
-<p>根据 费马小定理 $a^{p-1} \equiv 1 (\mod p) $ p 是质数</p>
-<p>所以 $b^{-1} = a ^{p-2}$</p>
-<ol>
-<li><p>$a &lt; m$  ,a 和 m 一定互质</p>
+        <h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><ul>
+<li>又名二进制索引树 (Binary indexed tree)</li>
+<li>分级管理系统<ul>
+<li>成员 a[1], a[2]……</li>
+<li>管理小组 c[1], c[2]……</li>
+<li>根据下标来规定每个管理小组管理的范围 <ul>
+<li>i 的二进制 结尾有几个连续的 0 就是从下标开始向前几个位置</li>
+<li>lowbit(x) = x &amp; (-x)</li>
+</ul>
 </li>
-<li><p>$a &gt;= m $,a 不是m的倍数 互质</p>
+<li>直接前驱 一个<ul>
+<li>c[i - lowbit(i)]</li>
+<li>一个点和他的直接后继可能同一个直接前驱 5，6 的直接前驱是 4 ，6 是 5 的直接后继</li>
+<li>大部分是左兄弟</li>
+</ul>
 </li>
-<li><p>a 是 m 的倍数 那么不存在 乘法逆元 $ a \star x \mod m = 0 $ 但是 $ \frac{a}{b}  \mod m $ 不一定等于 $0$</p>
-<p>a = 32 m = 4 b = 16  $ \frac {a} {b} = 2 $ 不存在 $ b ^{ -1 } \star a \mod m  = 2 $</p>
+<li>直接后继 一个<ul>
+<li>c[i + lowbit(i)]</li>
+<li>父节点</li>
+</ul>
 </li>
-</ol>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a % p == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>; <span class="comment">// 不存在逆元</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * a % p); <span class="comment">// 要 % p 再转换 不然还是会溢出</span></span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) (a) * a % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>前驱 集合<ul>
+<li>直接前驱 和 直接前驱的前驱</li>
+</ul>
+</li>
+<li>后继 集合<ul>
+<li>直接后继 和 直接后继的后继</li>
+</ul>
+</li>
+<li>父节点管理的终点 = 该点位置和一个开始向后 该点的管理范围</li>
+<li>通过更新后继来更新后继的信息</li>
+<li>通过查询前驱得到不重不漏的前缀和</li>
+</ul>
+</li>
+<li>多维树状数组<ul>
+<li>就是多加一维的前驱或者后继</li>
+</ul>
+</li>
+<li>树状数组的局限性<ul>
+<li>要满足减法规则，比如区间和可以 sum[j] - sum[i - 1]</li>
+<li>不满足的如区间最大值 不能 qmax[j] - qmax[i - 1] 就要用线段树 或者 分块</li>
+<li>区间修改是 O(nlogn)<ul>
+<li>可以用两个树状数组来维护一个数学公式来完成区间和的区间修改</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x &amp; (-x);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = u; i &lt;= n; i += lowbit(i)) &#123;</span><br><span class="line">        c[i] += x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = x; i; i -= lowbit(i)) &#123;</span><br><span class="line">        res += c[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h5 id="POJ2352"><a href="#POJ2352" class="headerlink" title="POJ2352"></a>POJ2352</h5><ul>
+<li>看似是二维的树状数组，实际上输入的时候已经排好序了。</li>
+<li>记录下 x 的个数。每次查询下就可以得到当前星星的等级，然后添加当前的星星</li>
+</ul>
+<h5 id="POJ3067"><a href="#POJ3067" class="headerlink" title="POJ3067"></a>POJ3067</h5><ul>
+<li>k 是不确定用 long long</li>
+<li>发现只有当 x1 &lt; x2 &amp;&amp; y1 &gt; y2 的时候才会出现交点 放在 pair<int, int> 排序下</int,></li>
+<li>每次查询到当前的点 在此之前有几个 y 值大于它，用已经查询的点数 - 比他小的前缀和</li>
+</ul>
+<h5 id="POJ1195"><a href="#POJ1195" class="headerlink" title="POJ1195"></a>POJ1195</h5><ul>
+<li>多维树状数组直接套用就行了</li>
+</ul>
+<h5 id="POJ3321"><a href="#POJ3321" class="headerlink" title="POJ3321"></a>POJ3321</h5><ul>
+<li>dfs序 把树状结构修改为线性结构 之后使用的都是新分配的序号（也就是第一次到该点的编号 L[i]</li>
+<li>最好记录下 a[] 数组 ，不然还要去查询下</li>
+<li>剩下的就是单点修改，区间查询</li>
+</ul>
+<p><a href="#" title="This may be the most platform independent comment">//</a>: #  * 输入的顺序应该就是从父到子，因为没加二次遍 ac，但是加了却wa了，线段树的加了也ac。。。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/03/%E5%BF%AB%E9%80%9F%E5%B9%82/" data-id="ck79zyofr000a8idp0zqe5fyi" class="article-share-link">Share</a>
+      <a data-url="https://chu8aa.github.io/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" data-id="ckbdeaopf0000vhdp3i8e8f86" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" rel="tag">数据结构3</a></li></ul>
 
     </footer>
   </div>
@@ -137,19 +178,10 @@ a = a^{2^{x1} + 2^{x2}+...}</script><script type="math/tex; mode=display">
     
 <nav id="article-nav">
   
-    <a href="/2020/02/03/%E6%8B%93%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          拓展欧几里得算法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/02/02/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/06/11/%E5%88%86%E5%9D%97/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">欧拉函数</div>
+      <div class="article-nav-title">分块</div>
     </a>
   
 </nav>

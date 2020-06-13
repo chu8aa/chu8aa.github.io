@@ -60,6 +60,459 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Linux基础" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/03/02/Linux%E5%9F%BA%E7%A1%80/" class="article-date">
+  <time datetime="2020-03-02T09:39:39.000Z" itemprop="datePublished">2020-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/02/Linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><h5 id="Linux版本"><a href="#Linux版本" class="headerlink" title="Linux版本"></a>Linux版本</h5><ul>
+<li>内核版本<ul>
+<li>主版本号，次版本号，末版本号</li>
+<li>次版本号奇数是开发版，偶数是稳定版</li>
+</ul>
+</li>
+<li>发行版本<ul>
+<li>RedHat Enterprise Linux</li>
+<li>Fedora</li>
+<li>CentOS</li>
+<li>Debian</li>
+<li>Ubuntu</li>
+</ul>
+</li>
+</ul>
+<h5 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h5><h6 id="man"><a href="#man" class="headerlink" title="man"></a>man</h6><ul>
+<li>manual 一共9章 可以通过 man 7 man 或者man man查看每个章节类型是什么</li>
+<li>man 1 ls 一般情况下 1是省略的</li>
+<li>man -a passwd 可以查看不同章节重复的名利</li>
+<li><h6 id="help"><a href="#help" class="headerlink" title="help"></a>help</h6></li>
+<li><p>shell 命令解释器自带的称为内部命令 其他是外部命令</p>
+</li>
+<li>内部命令 help cd</li>
+<li>外部命令 ls —help.  cd —help 也可以</li>
+<li>可以用 type cd 来看是什么类型命令</li>
+<li>whick ls 来查看命令的位置 内部命令没有</li>
+<li><h6 id="info"><a href="#info" class="headerlink" title="info"></a>info</h6></li>
+<li><p>info 帮助比 help 更详细，作为 help 的补充</p>
+</li>
+<li>info ls</li>
+</ul>
+<h6 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h6><ol>
+<li>ctrl + l 清屏</li>
+<li>ctrl + r 查找之前用的命令</li>
+<li>方向键 查看之前的命令</li>
+</ol>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><h6 id="ls-可追加"><a href="#ls-可追加" class="headerlink" title="ls 可追加"></a>ls <strong>可追加</strong></h6><ul>
+<li>/ 是 根目录 /root 是 root 用户的家目录</li>
+<li>/opt 是绝对路径 ./opt 相对路径 ../opt 也是相对路径 opt也是相对路径</li>
+<li>可以追加文件 ls / /root  (/ 和 /root 之间一定要有空格多个无所谓</li>
+<li>ls -l <ul>
+<li>第一个参数  文件类型和权限 第一个字符是类型 之后九个是权限</li>
+<li>第二个参数  文件个数或者文件夹内的个数</li>
+<li>第三个参数 是谁创建这个文件</li>
+<li>第四个参数 是创建者属于那个用户组</li>
+<li>第五个参数 是文件大小</li>
+<li>第六个参数 是最后修改的时间</li>
+<li>第七个参数 是名字</li>
+</ul>
+</li>
+<li>ls -a<ul>
+<li>可以查看隐藏文件</li>
+<li>隐藏文件以.开头就是隐藏文件</li>
+</ul>
+</li>
+<li>ls -r 逆序</li>
+<li>ls -t 时间</li>
+<li>ls -l -r -t == ls -lrt == ls -ltr 顺序无关</li>
+<li>ls -R 递归查看下面的全部文件</li>
+<li>-d 单独查看一个 目录加是查看本身而不是里面的东西</li>
+</ul>
+<h6 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h6><ul>
+<li>查看路径</li>
+</ul>
+<h6 id="clear"><a href="#clear" class="headerlink" title="clear"></a>clear</h6><ul>
+<li>清空终端</li>
+<li>快捷键 control + l</li>
+</ul>
+<h6 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h6><ul>
+<li>shell 提供的补全功能 Tab键</li>
+<li>cd - 返回上一次呆的路径</li>
+</ul>
+<h6 id="mkdir-可以追加"><a href="#mkdir-可以追加" class="headerlink" title="mkdir  可以追加"></a>mkdir  <strong>可以追加</strong></h6><ul>
+<li>建立目录</li>
+<li>-p 建立多级目录</li>
+</ul>
+<h6 id="rmdir-可以追加"><a href="#rmdir-可以追加" class="headerlink" title="rmdir   可以追加"></a>rmdir   <strong>可以追加</strong></h6><ul>
+<li>删除一个空目录</li>
+<li>-p 一定要注意和rm 不同 rmkdir -p a/b/c</li>
+<li>一定要记住 everything is file</li>
+</ul>
+<h6 id="rm-可以追加"><a href="#rm-可以追加" class="headerlink" title="rm  可以追加"></a>rm  <strong>可以追加</strong></h6><ul>
+<li>删除一个文件或者目录</li>
+<li>-r 递归删除  rm -r a</li>
+<li>-f 不带提示</li>
+</ul>
+<h6 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h6><ul>
+<li>复制文件或者目录</li>
+<li>-r 递归复制 才复制目录及下面的文件 不然的话只能复制文件 对一些特殊文件会做未声明处理</li>
+<li>-R 递归复制 对特殊文件直接原样复制</li>
+<li>-v 显示从哪到哪</li>
+<li>-p 保留用户、权限、时间等文件属性</li>
+<li>-a 等同于 -dpR</li>
+</ul>
+<h5 id="文件查看命令"><a href="#文件查看命令" class="headerlink" title="文件查看命令"></a>文件查看命令</h5><h6 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h6><ul>
+<li>文本内容显示到终端</li>
+</ul>
+<h6 id="head-tail"><a href="#head-tail" class="headerlink" title="head tail"></a>head tail</h6><ul>
+<li>查看前面（后面）几行 默认十行 </li>
+<li>head -12 查看前面12行，tail 同理</li>
+<li>空格下一页 回车下一行</li>
+<li>tail 有一个 -f 选项是可以追踪更新 用于日志文件 </li>
+</ul>
+<h6 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h6><ul>
+<li>统计信息</li>
+<li>行数 字数 字节数</li>
+</ul>
+<h6 id="more"><a href="#more" class="headerlink" title="more"></a>more</h6><ul>
+<li>空格下一页 回车下一行 b上一页</li>
+</ul>
+<h6 id="less"><a href="#less" class="headerlink" title="less"></a>less</h6><ul>
+<li>空格下一页 回车下一行 b上一页 可以上一行下一行</li>
+<li>less 在查看之前不会加载整个文件</li>
+</ul>
+<h5 id="打包-amp-压缩-amp-解压缩"><a href="#打包-amp-压缩-amp-解压缩" class="headerlink" title="打包 &amp; 压缩 &amp; 解压缩"></a>打包 &amp; 压缩 &amp; 解压缩</h5><h6 id="打包-amp-压缩"><a href="#打包-amp-压缩" class="headerlink" title="打包 &amp; 压缩"></a>打包 &amp; 压缩</h6><ul>
+<li>用作备份</li>
+<li>tar cf 压缩后的文件名.tar 压缩的文件/目录</li>
+<li>c 是打包 f 是指定类型是文件 </li>
+<li>z 是 gzip 压缩 后缀 .tar.gz, .tgz 压缩速度快</li>
+<li>j 是 bzip2 压缩 后缀 .tar.bz2, .tbz2压缩比例更高</li>
+</ul>
+<h6 id="解包-amp-解压缩"><a href="#解包-amp-解压缩" class="headerlink" title="解包 &amp; 解压缩"></a>解包 &amp; 解压缩</h6><ul>
+<li>x 是解包</li>
+<li>tar xf 要解包的文件名 -C 目标路径</li>
+</ul>
+<h5 id="grub-修改密码"><a href="#grub-修改密码" class="headerlink" title="grub 修改密码"></a>grub 修改密码</h5><h6 id="进入grub"><a href="#进入grub" class="headerlink" title="进入grub"></a>进入grub</h6><ol>
+<li>sudo edit /etc/default/grub</li>
+<li>注释 grub_timeout_style=hidden<br> 修改grub_cmdline_linux_default = text</li>
+<li>sudo update-grub</li>
+</ol>
+<p>或者 开机按住 shift</p>
+<h6 id="修改root密码"><a href="#修改root密码" class="headerlink" title="修改root密码"></a>修改root密码</h6><ol>
+<li>进入grub</li>
+<li>选择 Advanced 回车</li>
+<li>选择一个 recovery mode 按e</li>
+<li>ro recovery nomodeset 修改为 rw single init=/bin/bash 按F10</li>
+<li>passwd 命令</li>
+</ol>
+<h5 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h5><p>vim 是 vi 向上兼容的编辑器<br>模式：</p>
+<pre><code>1. 正常模式
+2. 插入模式
+3. 命令模式
+4. 可视模式
+</code></pre><h6 id="正常模式进入插入模式"><a href="#正常模式进入插入模式" class="headerlink" title="正常模式进入插入模式"></a>正常模式进入插入模式</h6><ol>
+<li>i 是在光标之前的位置插入 I 是在光标这一行最前面插入</li>
+<li>a 是在光标之后的位置插入 A 是在光标这一行最后面插入</li>
+<li>o 是在光标下一行开拓一行 O 是在光标上一行开拓一行</li>
+</ol>
+<h6 id="正常模式进入可视模式"><a href="#正常模式进入可视模式" class="headerlink" title="正常模式进入可视模式"></a>正常模式进入可视模式</h6><ol>
+<li>v 字符可视</li>
+<li>V 行可视</li>
+<li>ctrl + v 块可视</li>
+</ol>
+<h6 id="正常模式进入命令模式"><a href="#正常模式进入命令模式" class="headerlink" title="正常模式进入命令模式"></a>正常模式进入命令模式</h6><ol>
+<li>:</li>
+</ol>
+<h6 id="正常模式下的操作"><a href="#正常模式下的操作" class="headerlink" title="正常模式下的操作"></a>正常模式下的操作</h6><ol>
+<li>移动 hjkl 在字符界面使用方向键可能出错</li>
+<li>复制<ol>
+<li>一行 yy,</li>
+<li>复制三行，3yy , 如果剩下的行不足 n 行 那么不会复制</li>
+<li>从光标之后开始复制 y$</li>
+</ol>
+</li>
+<li>粘贴 p  <ol>
+<li>复制的是一行 那么会在下一行粘贴</li>
+<li>复制的是一段 那么会在光标之后粘贴</li>
+</ol>
+</li>
+<li>剪切 d<ol>
+<li>剪切一行 dd</li>
+<li>剪切n行 ndd , 如果剩下的行不足 n 行 那么不会复制</li>
+<li>剪切从光标开始 d$</li>
+</ol>
+</li>
+<li>撤销<ol>
+<li>u</li>
+</ol>
+</li>
+<li>反撤销<ol>
+<li>ctrl + r</li>
+</ol>
+</li>
+<li>单个字符操作<ol>
+<li>删除 x</li>
+<li>替换 r</li>
+</ol>
+</li>
+<li>快速移动到指定行<ol>
+<li>命令模式开启行数显示 :set nu 关闭 :set nonu</li>
+<li>n G 移动到 n 行 (n &gt; size() 会到最后一行)</li>
+<li>gg 首行 G 最后一行</li>
+<li>^ 一行的开头 $ 一行的</li>
+</ol>
+</li>
+</ol>
+<h6 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h6><ol>
+<li>保存文件<ol>
+<li>w 存在文件 直接保存</li>
+<li>w + 路径 保存到指定路径的文件中</li>
+</ol>
+</li>
+<li>退出<ol>
+<li>q</li>
+<li>不保存退出 q!</li>
+</ol>
+</li>
+<li>执行外部命令<ol>
+<li>! 如 !ipconfig</li>
+</ol>
+</li>
+<li>查找字符串<ol>
+<li>/abc</li>
+<li>n下一个 N上一个</li>
+</ol>
+</li>
+<li>替换字符串<ol>
+<li>:s/old/new 光标在这一行第一个匹配的替换</li>
+<li>:%s/old/new 每行的一个匹配替换</li>
+<li>:%s/old/new/g 是全局</li>
+<li>:3,5s/old/new/g 指定行全部替换 （行一定要合法 不然报错</li>
+</ol>
+</li>
+</ol>
+<h6 id="配置vim"><a href="#配置vim" class="headerlink" title="配置vim"></a>配置vim</h6><p>目录在 /etc/vim/vimrc 或者 /etc/vimrc</p>
+<h6 id="可视模式"><a href="#可视模式" class="headerlink" title="可视模式"></a>可视模式</h6><p>常用 块可视模式 d 删除 I批量插入</p>
+<h4 id="用户和用户组管理"><a href="#用户和用户组管理" class="headerlink" title="用户和用户组管理"></a>用户和用户组管理</h4><p>root用户, 普通用户<br>用户会被记录到 /etc/passwd，/etc/shadow中 shadow 是和密码相关的文件<br>用户 uid 改为 0 那么会被当成 root用户来对待</p>
+<h5 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h5><h6 id="常用命令-1"><a href="#常用命令-1" class="headerlink" title="常用命令"></a>常用命令</h6><ul>
+<li>useradd 新建用户<ul>
+<li>没有指定组 那么会建立一个新的组 和用户同名</li>
+<li>-m 添加家目录 默认不加</li>
+<li>-g 指定组</li>
+</ul>
+</li>
+<li>id 用户名 查看用户信息</li>
+<li>passwd [指定用户]</li>
+<li>userdel 删除用户<ul>
+<li>-r 删除家目录 默认不删</li>
+<li>如果家目录所属用户是数字那么只能是root用户才可以打开</li>
+</ul>
+</li>
+<li>usermod 修改用户属性<ul>
+<li>-d 修改家目录</li>
+<li>-g 修改用户组</li>
+</ul>
+</li>
+<li>change 修改用户属性 更改用户或者密码过期信息</li>
+<li>su 临时切换用户 一次性 退出 仍需要密码<ul>
+<li>su - 减号是切换环境 不带就是不完全的切换</li>
+<li>root 切换到其他的用户是不用密码的</li>
+</ul>
+</li>
+</ul>
+<h5 id="组管理命令"><a href="#组管理命令" class="headerlink" title="组管理命令"></a>组管理命令</h5><h6 id="常用命令-2"><a href="#常用命令-2" class="headerlink" title="常用命令"></a>常用命令</h6><ul>
+<li>groupadd</li>
+<li>groupdel</li>
+</ul>
+<h5 id="切换"><a href="#切换" class="headerlink" title="切换"></a>切换</h5><h6 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h6><ul>
+<li>su 切换用户<ul>
+<li>su - USERNAME 使用 login shell 方式切换用户</li>
+</ul>
+</li>
+<li>sudo 以其他用户身份执行命令<ul>
+<li>visudo 设置需要使用 sudo 的用户(组)</li>
+<li>不同的系统大同小异<ul>
+<li>用户 或者 %用户组</li>
+<li>登陆方式 本地 或者 全部</li>
+<li>可执行的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sudo 的权限 &lt; root用户的权限 </li>
+</ul>
+<h4 id="用户和用户组的配置文件"><a href="#用户和用户组的配置文件" class="headerlink" title="用户和用户组的配置文件"></a>用户和用户组的配置文件</h4><h5 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h5><ol>
+<li>/etc/passwd 可以通过这个手动添加一个用户<ol>
+<li>user3:x:1003:1004::/home/user3:/bin/sh<ol>
+<li>user3 是用户名</li>
+<li>x 是是否要密码认证 如果没有 x 那么切换的时候是不用密码的</li>
+<li>1003 是 uid 唯一识别一个用户 这个改成 0 就是 root 用户</li>
+<li>1004 是 gid 所属用户组</li>
+<li>/home/user3 家目录路径</li>
+<li>/bin/sh 用户的命令解释器 一般是 /bin/bash 如果是 /sbin/nologin 是不允许登陆的</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>/etc/shadow<ol>
+<li>user3:$6$S2bbCpyN$9kQnEj6ZbMr9R6hukYk/6VyjCbdYN7qnN2YiVPWV2Ut103KGId.PrqRXlCRzDLaeeqrxOKcpK25FA6rHo1Te11:18376:0:99999:7:::<ol>
+<li>user3 用户名</li>
+<li>后面是加密后的密码格式 即便是相同的密码也是不同的加密结果</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>/etc/group<ol>
+<li>user3:x:1004:<ol>
+<li>user3 组名称</li>
+<li>x 密码验证</li>
+<li>1004 组的gid</li>
+<li>还有一个他的子组 是他的子组就一定是他 是他不是是他的子组</li>
+</ol>
+</li>
+<li>id user3<ol>
+<li>uid=1003(user3) gid=1004(user3) groups=1004(user3)</li>
+</ol>
+</li>
+<li>zlp:x:1001:user3<ol>
+<li>uid=1003(user3) gid=1004(user3) groups=1004(user3),1001(zlp) </li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="文件与目录权限的表示方式"><a href="#文件与目录权限的表示方式" class="headerlink" title="文件与目录权限的表示方式"></a>文件与目录权限的表示方式</h4><h5 id="查看文件权限"><a href="#查看文件权限" class="headerlink" title="查看文件权限"></a>查看文件权限</h5><h6 id="命令解释"><a href="#命令解释" class="headerlink" title="命令解释"></a>命令解释</h6><ol>
+<li>drwxr-xr-x  2 root root    4096 Apr 24 13:22 vim<ol>
+<li>d 类型 Linux是不关心拓展名的<ol>
+<li><ul>
+<li>是普通文件</li>
+</ul>
+</li>
+<li>d 是目录文件</li>
+<li>b 块特殊文件 设备 如：移动硬盘</li>
+<li>c 字符特殊文件 终端 shell</li>
+<li>l 符号链接 类似Windows快捷方式</li>
+<li>f 命名管道  和下面是通信相关的</li>
+<li>s 套接字文件</li>
+</ol>
+</li>
+<li>rwxr-xr-x 权限 根据不同类型rwx 的意义不同<ol>
+<li>rwx 基本字符<ol>
+<li>普通文件 r = 4 读, w = 2 写, x = 1 执行 </li>
+<li>目录文件 x 进入目录 , rx 显示目录内的文件名 wx 修改目录内的文件名</li>
+</ol>
+</li>
+<li>还有特殊权限</li>
+<li>第一个三个字符是所属用户</li>
+<li>第二个三个字符是所属组</li>
+<li>第三个三个字符是其他用户</li>
+<li>facl 可以指定特殊要求用户</li>
+</ol>
+</li>
+<li>root root 所属用户和组<ol>
+<li>创建的时候属于用户用户组</li>
+</ol>
+</li>
+<li>vim 文件名</li>
+</ol>
+</li>
+<li>创建新文件有默认权限，根据 umask 值计算，属主和属组根据当前进程的用户来设定<ol>
+<li>普通文件 666 - umask后三个不进位。每个位置代表ugo 要减去的权限 (666 &amp; -(后三个))</li>
+<li>目录文件 777</li>
+<li>一个是特殊权限相关</li>
+</ol>
+</li>
+</ol>
+<h4 id="文件权限的修改"><a href="#文件权限的修改" class="headerlink" title="文件权限的修改"></a>文件权限的修改</h4><h5 id="命令-1"><a href="#命令-1" class="headerlink" title="命令"></a>命令</h5><ol>
+<li>chmod 修改文件目录权限<ol>
+<li>chmod u+x /tmp/testfile<ol>
+<li>u 主 g 组 o 其他 a 全部</li>
+<li><ul>
+<li>增加 - 减少 = 直接设置  = 什么都不加就是没权限</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>chmod 755 /tmp/testfile<ol>
+<li>755 不合法报错</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>chown 更改属主，属组<ol>
+<li>chown zlp /test 主</li>
+<li>chown :zlp /test 组</li>
+<li>chown zlp:zlp /test</li>
+</ol>
+</li>
+<li>chgrp 可以单独更改属组 不常用</li>
+</ol>
+<h4 id="权限管理及文件的特殊权限"><a href="#权限管理及文件的特殊权限" class="headerlink" title="权限管理及文件的特殊权限"></a>权限管理及文件的特殊权限</h4><p>当属主的权限和属组的权限有冲突的时候，看属主的权限<br>centos 只有r权限只能看文件名<br>Ubuntu 只有r权限是可以看一些信息的</p>
+<h5 id="特殊权限"><a href="#特殊权限" class="headerlink" title="特殊权限"></a>特殊权限</h5><ol>
+<li>SUID 用于二进制可执行文件，执行命令时取得文件属主权限 4<ol>
+<li>/usr/bin/passwd<ol>
+<li>-rwsr-xr-x 1 root root 59640 Mar 23  2019 /usr/bin/passwd</li>
+<li>-rw-r——- 1 root shadow 1874 Apr 24 17:03 /etc/shadow 在centos 中是 000 权限</li>
+<li>普通用户要改自己的密码是不能改 shadow 所以有了 SUID</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>SGID 用于目录，在该目录下创建新的文件和目录，权限自动更改为该目录的属组 2<ol>
+<li>文件共享</li>
+</ol>
+</li>
+<li>SBIT 用于目录，该目录下新建的文件和目录，仅root 和自己可以删除 1<ol>
+<li>/tmp<ol>
+<li>drwxrwxrwt 15 root root 4096 Apr 24 19:25 tmp/</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/03/02/Linux%E5%9F%BA%E7%A1%80/" data-id="ck7ag85kt00007cdpcdts5tqd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Leetcode打卡" class="article article-type-post" itemscope itemprop="blogPost">
 
 
@@ -947,72 +1400,6 @@ a * b \mod p = (a \mod p) (b \mod p )</script><hr>
 
 
   
-    <article id="post-中国剩余定理" class="article article-type-post" itemscope itemprop="blogPost">
-
-
-
-  <div class="article-meta">
-    <a href="/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/" class="article-date">
-  <time datetime="2020-02-08T04:23:06.000Z" itemprop="datePublished">2020-02-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/">中国剩余定理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-        
-    </div>
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <script type="math/tex; mode=display">
-\begin{cases}
-x \equiv a_1(\mod m_1)\\
-x \equiv a_2(\mod m_2)\\
-...\\
-x \equiv a_n(\mod m_n)\\
-\end{cases}</script><p>$m_1 , m_2 …m_n$ <strong>两两互质</strong></p>
-<p>$M = m_1m_2m_3…m_n$</p>
-<p>$M_1 = m_2m_3…m_n$</p>
-<p>$M_2 = m_1m_3…m_n$</p>
-<p>$M_i = \frac{M}{m_i},m_i = \frac{M}{M_i}$ 并且$M_i$和$m_i$互质，所以$M_i$有逆 </p>
-<p>设$M_i ^{-1}$ 表示 $M_i$ 模 $m_i$ 的逆</p>
-<p>$x = a_1M_1M_1^{-1} + a_2M_2M_2^{-1}…a_nM_nM_n^{-1}$</p>
-<p>因为$M_1M_1^{-1} \mod  m_1 = 1,$ $M_iM_i^{-1} \mod m_1 = 0$ ,i !=1</p>
-<p>$M_2M_2^{-1} \mod  m_2 = 1$ $,M_iM_i^{-1} \mod m_2 = 0 $,i != 2</p>
-<p>同理可得 $x$ 是一个解</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/02/08/%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86/" data-id="ck79zyofn00048idp2x94au3s" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1038,7 +1425,7 @@ x \equiv a_n(\mod m_n)\\
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/" rel="tag">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" rel="tag">最小树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/" rel="tag">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" rel="tag">数据结构3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" rel="tag">最小树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li></ul>
     </div>
   </div>
 
@@ -1048,7 +1435,7 @@ x \equiv a_n(\mod m_n)\\
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 13.33px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 13.33px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 13.33px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 13.33px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 13.33px;">数据结构</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%843/" style="font-size: 10px;">数据结构3</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
     </div>
   </div>
 
@@ -1070,6 +1457,10 @@ x \equiv a_n(\mod m_n)\\
       <ul>
         
           <li>
+            <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/11/%E5%88%86%E5%9D%97/">分块</a>
           </li>
         
@@ -1083,10 +1474,6 @@ x \equiv a_n(\mod m_n)\\
         
           <li>
             <a href="/2020/04/07/%E5%AD%97%E7%AC%A6%E4%B8%B2hash/">字符串hash</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/06/%E5%8C%BA%E9%97%B4dp/">区间dp</a>
           </li>
         
       </ul>
