@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>线段树 | 小z的笔记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本 (segment tree) 是一种二叉搜索树，也是平衡二叉树。 每一个节点都对应一个区间 [L, R]，叶子结点对应的区间只有一个节点 (L &#x3D; R) 每一个非叶子结点左孩子区间为[L, (L + R) &#x2F; 2]，右孩子区间为[(L + R) &#x2F; 2 + 1, R] 树高为 log(n)，树上的操作大多和树高相关，更新和查询的种类很多，要灵活运用线段树，可以解决很多问题 RMQ(Rang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树">
+<meta property="og:url" content="https://chu8aa.github.io/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/index.html">
+<meta property="og:site_name" content="小z的笔记本">
+<meta property="og:description" content="基本 (segment tree) 是一种二叉搜索树，也是平衡二叉树。 每一个节点都对应一个区间 [L, R]，叶子结点对应的区间只有一个节点 (L &#x3D; R) 每一个非叶子结点左孩子区间为[L, (L + R) &#x2F; 2]，右孩子区间为[(L + R) &#x2F; 2 + 1, R] 树高为 log(n)，树上的操作大多和树高相关，更新和查询的种类很多，要灵活运用线段树，可以解决很多问题 RMQ(Rang">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-15T10:34:57.000Z">
+<meta property="article:modified_time" content="2020-06-15T11:03:10.956Z">
+<meta property="article:author" content="chu8aa">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小z的笔记本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chu8aa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-线段树" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/" class="article-date">
+  <time datetime="2020-06-15T10:34:57.000Z" itemprop="datePublished">2020-06-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线段树
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本"><span class="post-toc-text">基本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#例题"><span class="post-toc-text">例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#HDU-1166"><span class="post-toc-text">HDU 1166</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ-3468"><span class="post-toc-text">POJ 3468</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#HDU-4902"><span class="post-toc-text">HDU 4902</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ-2777"><span class="post-toc-text">POJ 2777</span></a></li></ol></li></ol>
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><ul>
+<li>(segment tree) 是一种二叉搜索树，也是平衡二叉树。</li>
+<li>每一个节点都对应一个区间 [L, R]，叶子结点对应的区间只有一个节点 (L = R)</li>
+<li>每一个非叶子结点左孩子区间为[L, (L + R) / 2]，右孩子区间为[(L + R) / 2 + 1, R]</li>
+<li>树高为 log(n)，树上的操作大多和树高相关，更新和查询的种类很多，要灵活运用线段树，可以解决很多问题</li>
+<li>RMQ(Rang Minimum/Maximum Query) <ul>
+<li>点更新，修改一个元素的值</li>
+<li>区间查询，查询一个区间的最值</li>
+</ul>
+</li>
+<li>空间大小要开四倍的空间</li>
+<li>分治算法策略</li>
+<li>线段树较树状数组用途更广，更灵活，更直观一些</li>
+<li>树状数组较线段树节省空间，代码简单易懂</li>
+<li>能用树状数组的问题一定能用线段树</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一般有懒标记就要 pushdown()操作，但是也可以只有 lazy来代表一个区间 如：POJ 2777</span></span><br><span class="line"><span class="comment">// 查询也要看情况去改变 如 POJ 2777</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    tree[p].l = l, tree[p].r = r;</span><br><span class="line">    <span class="keyword">if</span> (tree[p].l == tree[p].r) &#123;</span><br><span class="line">    <span class="comment">//一些数据的初始化</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    build(p &lt;&lt; <span class="number">1</span>, l, mid), build(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">    <span class="comment">// pushup(p);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 修改</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= tree[p].l &amp;&amp; tree[p].r &lt;= r) &#123;</span><br><span class="line">        <span class="comment">// 区间操作很灵活要看具体操作</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// pushdonw(p);</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> mid = (tree[p].l + tree[p].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= mid) modify(p &lt;&lt; <span class="number">1</span>, l, r, x);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; r) modify(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r, x);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// pushup(p);</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= tree[p].l &amp;&amp; tree[p].r &lt;= r) &#123;</span><br><span class="line">    <span class="comment">// 查询</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// pushdown();</span></span><br><span class="line">    <span class="keyword">int</span> mid = (tree[p].l + tree[p].r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= mid) ans += query(p &lt;&lt; <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">if</span> (r &gt; mid) ans += query(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r);</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h5 id="HDU-1166"><a href="#HDU-1166" class="headerlink" title="HDU 1166"></a>HDU 1166</h5><ul>
+<li>操作<ul>
+<li>u 点增加或者减少 k 个人</li>
+<li>[l, r] 总共多少人</li>
+</ul>
+</li>
+<li>单点修改，区间查询 </li>
+</ul>
+<h5 id="POJ-3468"><a href="#POJ-3468" class="headerlink" title="POJ 3468"></a>POJ 3468</h5><ul>
+<li>操作<ul>
+<li>[l, r] 每个点增加 k </li>
+<li>[l, r] 的总和</li>
+</ul>
+</li>
+<li>区间修改，区间查询 加一个 lazy 标记</li>
+</ul>
+<h5 id="HDU-4902"><a href="#HDU-4902" class="headerlink" title="HDU 4902"></a>HDU 4902</h5><ul>
+<li>操作<ol>
+<li>[l, r] 每个树都修改为 x</li>
+<li>[l, r] 中每个大于 x 的数 与 x 进行 gcd 操作 </li>
+<li>查询每个点的数值 </li>
+</ol>
+</li>
+<li>操作 1. lazy 标记一下</li>
+<li>操作 2. 可以用一个 mx 来记录区间的最大值来优化，如区间最大值都小于等于 x 那么就不要进入该区间</li>
+<li>操作 3. 每个点进行查询 或者 build() 操作那样打印，时间差不多</li>
+</ul>
+<h5 id="POJ-2777"><a href="#POJ-2777" class="headerlink" title="POJ 2777"></a>POJ 2777</h5><ul>
+<li>操作<ul>
+<li>[l, r] 每个点染成 k 色</li>
+<li>[l, r] 一共几个不同的颜色</li>
+</ul>
+</li>
+<li>其实不用把数据都记录在区间中，只要记录重要的，有些可以通过查询得到的就不用在节点中开辟一段记录空间</li>
+<li>每次查询用一个 ans[] 数组来记录[l, r]中查询到的颜色</li>
+<li>要灵活使用 lazy 有一些可以直接全部区间进行标记。</li>
+<li>查询也不一定要按照一般左边右边，有时候可以根据数据去决定如何查询</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/" data-id="ckbge3ad50000frdpf23i5yia" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">树状数组</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/" rel="tag">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" rel="tag">最小树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 12.5px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 17.5px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 12.5px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 12.5px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/%E5%88%86%E5%9D%97/">分块</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/22/Android%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">Android第一个应用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 chu8aa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>

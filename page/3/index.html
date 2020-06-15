@@ -60,6 +60,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-高斯消元" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" class="article-date">
+  <time datetime="2020-02-09T07:43:45.000Z" itemprop="datePublished">2020-02-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/">高斯消元</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">110</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">double</span>[][] arr = <span class="keyword">new</span> <span class="keyword">double</span>[N][N];</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">double</span> eps = <span class="number">1e-6</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">                System.out.printf(<span class="string">"%.2f\t"</span>, arr[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">gauss</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r, c;</span><br><span class="line">        <span class="comment">// r 是未固定行的开始</span></span><br><span class="line">        <span class="comment">// c 是这一行的列值 非零的开始</span></span><br><span class="line">        <span class="keyword">for</span> (r = <span class="number">0</span>, c = <span class="number">0</span>; c &lt; n; ++c) &#123;</span><br><span class="line">            <span class="comment">// 找当前列 c 的最大值</span></span><br><span class="line">            <span class="keyword">int</span> t = r;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = r + <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Math.abs(arr[i][c]) &gt; Math.abs(arr[t][c])) &#123;</span><br><span class="line">                    t = i;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (Math.abs(arr[t][c]) &lt; eps) <span class="keyword">continue</span>; <span class="comment">// 未固定的全部行 这一列都是零</span></span><br><span class="line">            <span class="comment">// 将找出的列放到已固定的下一行</span></span><br><span class="line">            <span class="keyword">if</span> (t != r) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = c; i &lt;= n; ++i) &#123;</span><br><span class="line">                    <span class="keyword">double</span> temp = arr[t][i];</span><br><span class="line">                    arr[t][i] = arr[r][i];</span><br><span class="line">                    arr[r][i] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 将找出的行 当前列 改为 1</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= c; --i) arr[r][i] /= arr[r][c];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 将未固定 且不是 选定的行 当前 列 置零</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = r + <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Math.abs(arr[i][c]) &lt; eps) <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = n; j &gt;= c; --j) &#123;</span><br><span class="line">                    arr[i][j] -= arr[r][j] * arr[i][c]; <span class="comment">// arr[r][c] = 1 arr[i][c] -= arr[i][c] * 1 倍数 就是arr[i][c]</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"><span class="comment">//            out();</span></span><br><span class="line">            r++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (r &lt; n) &#123;</span><br><span class="line">            <span class="comment">// 代表 r 开始下面行全部都是零 如果 等式右边不是零 就是无解 否则无穷解</span></span><br><span class="line">            <span class="comment">// 1 x y ..</span></span><br><span class="line">            <span class="comment">// 0 0 a ..</span></span><br><span class="line">            <span class="comment">// 0 0 0 .. ?</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = r; i &lt; n; ++i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (Math.abs(arr[i][n]) &gt; eps) <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 使 第 i 行 第 i 列 为 1</span></span><br><span class="line">        <span class="comment">// 最后只要arr[i][n] 的值</span></span><br><span class="line">        <span class="comment">// 从下向上 保证 第 i 行 第 i 列 为 1</span></span><br><span class="line">        <span class="comment">// 这一行 后面的数通过下面的 一们操作为零</span></span><br><span class="line">        <span class="comment">// 1    0.5   -1.5    -4.5</span></span><br><span class="line">        <span class="comment">// 0     1      0      -2</span></span><br><span class="line">        <span class="comment">// 0     0      1       3</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; ++j) &#123;</span><br><span class="line">                arr[i][n] -= arr[j][n] * arr[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/09/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/" data-id="ck79zyog3001b8idphvem1ni6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-中国剩余定理" class="article article-type-post" itemscope itemprop="blogPost">
 
 
@@ -782,6 +833,10 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       <ul>
         
           <li>
+            <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
           </li>
         
@@ -795,10 +850,6 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
         
           <li>
             <a href="/2020/04/22/Android%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">Android第一个应用</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/07/%E5%AD%97%E7%AC%A6%E4%B8%B2hash/">字符串hash</a>
           </li>
         
       </ul>
@@ -848,5 +899,21 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
