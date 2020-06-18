@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>st表 | 小z的笔记本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本 倍增 任意整数均可表示成若干个 2 的次幂项的和 顾名思义：成倍的增长，如果问题的状态空间特别大，一步一步的递推算法复杂度太高，可以通过倍增思想，只考察 2 的整数次幂位置，快速缩小求解范围，直到找到所要的解   ST表 稀疏表 （Sparse Table），算法就是采用倍增的思想 O(nlogn) 的时间构造一个二维表之后，可以在O(1)的时间在线查询区间[l, r]的最值 ST算法可以有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="st表">
+<meta property="og:url" content="https://chu8aa.github.io/2020/06/18/ST%E8%A1%A8/index.html">
+<meta property="og:site_name" content="小z的笔记本">
+<meta property="og:description" content="基本 倍增 任意整数均可表示成若干个 2 的次幂项的和 顾名思义：成倍的增长，如果问题的状态空间特别大，一步一步的递推算法复杂度太高，可以通过倍增思想，只考察 2 的整数次幂位置，快速缩小求解范围，直到找到所要的解   ST表 稀疏表 （Sparse Table），算法就是采用倍增的思想 O(nlogn) 的时间构造一个二维表之后，可以在O(1)的时间在线查询区间[l, r]的最值 ST算法可以有">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-18T06:09:51.000Z">
+<meta property="article:modified_time" content="2020-06-18T06:45:54.695Z">
+<meta property="article:author" content="chu8aa">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小z的笔记本</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chu8aa.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ST表" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/06/18/ST%E8%A1%A8/" class="article-date">
+  <time datetime="2020-06-18T06:09:51.000Z" itemprop="datePublished">2020-06-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      st表
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本"><span class="post-toc-text">基本</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#例题"><span class="post-toc-text">例题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ3264"><span class="post-toc-text">POJ3264</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ3368"><span class="post-toc-text">POJ3368</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#HDU3486"><span class="post-toc-text">HDU3486</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#POJ2019"><span class="post-toc-text">POJ2019</span></a></li></ol></li></ol>
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><ul>
+<li>倍增<ul>
+<li>任意整数均可表示成若干个 2 的次幂项的和</li>
+<li>顾名思义：成倍的增长，如果问题的状态空间特别大，一步一步的递推算法复杂度太高，可以通过倍增思想，只考察 2 的整数次幂位置，快速缩小求解范围，直到找到所要的解</li>
+</ul>
+</li>
+<li>ST表<ul>
+<li>稀疏表 （Sparse Table），算法就是采用倍增的思想</li>
+<li>O(nlogn) 的时间构造一个二维表之后，可以在O(1)的时间在线查询区间[l, r]的最值</li>
+<li>ST算法可以有效的解决在线 RMQ 问题</li>
+<li>f[i][j] 表示 区间[i, i + 2^(j) -1]的最值</li>
+<li>f[i][j] = max/min(f[i][j - 1], f[i + 2^(j - 1)][j - 1]) </li>
+<li>2^(k) &lt;= x &lt; 2^(k + 1)</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] != a[i - <span class="number">1</span>]) b[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> b[i] = b[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">        f[i][<span class="number">0</span>] = b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(n * <span class="number">1.0</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; k; ++j) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - (<span class="number">1</span> &lt;&lt; j) + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            f[i][j] = <span class="built_in">max</span>(f[i][j - <span class="number">1</span>], f[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(r * <span class="number">1.0</span> - l + <span class="number">1</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(ans, <span class="built_in">max</span>(f[l][k], f[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Initlog</span><span class="params">()</span> <span class="comment">// 可以优化 log 的求法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lb[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;maxn;i++)</span><br><span class="line">        lb[i]=(i&amp;(i<span class="number">-1</span>))?lb[i<span class="number">-1</span>]:lb[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h5 id="POJ3264"><a href="#POJ3264" class="headerlink" title="POJ3264"></a>POJ3264</h5><ul>
+<li>操作<ul>
+<li>[l, r]之间最高的和最低的差值</li>
+</ul>
+</li>
+<li>就是建表，查询</li>
+</ul>
+<h5 id="POJ3368"><a href="#POJ3368" class="headerlink" title="POJ3368"></a>POJ3368</h5><ul>
+<li>一个非递减的序列</li>
+<li>操作<ul>
+<li>给定一个区间[l, r] 求区间的重复出现的次数最多几次</li>
+</ul>
+</li>
+<li>可以建立一个新的序列每个位置是从开始位置到当前位置这个数出现的次数</li>
+<li>查询的时候发现只有一个位置的数和最后一个位置的数会被截断<ul>
+<li>最后一个数不会影响查询的结果</li>
+<li>第一个数因为可能被截断，会影响区间的最大值<ul>
+<li>暴力去查第一个数或者二分</li>
+<li>区间除去同第一个数一样的数，剩下的查询最大值</li>
+<li>比较出结果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="HDU3486"><a href="#HDU3486" class="headerlink" title="HDU3486"></a>HDU3486</h5><ul>
+<li>n 个人 分成 m 组，每个组 floor(n / m) 个人，除去多余的人，每组选最高分的，使得总分大于 k</li>
+<li>很多人用二分<ul>
+<li>基本代码会被hack 比如 [1, 1, 1, 1, 1, 1, 1000] k = 999 一组但是二分可能会是 7</li>
+</ul>
+</li>
+<li>就是枚举 <ul>
+<li>剪枝 k / max_number 这个是可能的最小组 下界</li>
+<li>上界也可以但是没必要，因为总分不够直接退出</li>
+</ul>
+</li>
+<li>查询就是ST表</li>
+</ul>
+<h5 id="POJ2019"><a href="#POJ2019" class="headerlink" title="POJ2019"></a>POJ2019</h5><ul>
+<li>二维ST表</li>
+<li>网上还有另一种写法 f[i][j][k] 代表 (i, j) 边长为 k 的小正方形 ？ 没细看 也可能看错了</li>
+<li>这里用的是 f[i][j][k] ，第 i 行 从 j 位置开始 长度为 k<ul>
+<li>每次查询记得要遍历每一行要查询的区间</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            fmx[i][j][<span class="number">0</span>] = fmn[i][j][<span class="number">0</span>] = a[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> K = <span class="built_in">log</span>(<span class="number">1.0</span> * n) / <span class="built_in">log</span>(<span class="number">2.0</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt; K; ++k) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>; ++j) &#123;</span><br><span class="line">                fmx[i][j][k] = <span class="built_in">max</span>(fmx[i][j][k - <span class="number">1</span>], fmx[i][j + (<span class="number">1</span> &lt;&lt; (k - <span class="number">1</span>))][k - <span class="number">1</span>]);</span><br><span class="line">                fmn[i][j][k] = <span class="built_in">min</span>(fmn[i][j][k - <span class="number">1</span>], fmn[i][j + (<span class="number">1</span> &lt;&lt; (k - <span class="number">1</span>))][k - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(B * <span class="number">1.0</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">    <span class="keyword">int</span> maxx = <span class="number">-0x3f3f3f3f</span>;</span><br><span class="line">    <span class="keyword">int</span> minx = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = l; i &lt;= B + l - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        maxx = <span class="built_in">max</span>(maxx, <span class="built_in">max</span>(fmx[i][r][k], fmx[i][B + r - (<span class="number">1</span> &lt;&lt; k)][k]));</span><br><span class="line">        minx = <span class="built_in">min</span>(minx, <span class="built_in">min</span>(fmn[i][r][k], fmn[i][B + r - (<span class="number">1</span> &lt;&lt; k)][k]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxx - minx;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/06/18/ST%E8%A1%A8/" data-id="ckbkfa1wk0000medpc8nqcixq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">线段树</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/" rel="tag">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hash/" rel="tag">hash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="tag">动态规划</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%91%A8%E8%B5%9B/" rel="tag">周赛</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80/" rel="tag">基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" rel="tag">最小树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" rel="tag">最短路</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 13.33px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 13.33px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 16.67px;">数据结构</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/06/18/ST%E8%A1%A8/">st表</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/13/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/">树状数组</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/11/%E5%88%86%E5%9D%97/">分块</a>
+          </li>
+        
+          <li>
+            <a href="/2020/04/23/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 chu8aa<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+</html>

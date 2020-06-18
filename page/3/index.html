@@ -60,6 +60,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-组合数" class="article article-type-post" itemscope itemprop="blogPost">
+
+
+
+  <div class="article-meta">
+    <a href="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/" class="article-date">
+  <time datetime="2020-02-10T07:31:29.000Z" itemprop="datePublished">2020-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/">组合数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+        
+    </div>
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>$O(n^2)$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">2010</span>, mod = <span class="number">1000000007</span>;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> c[][] = <span class="keyword">new</span> <span class="keyword">int</span>[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span>) c[i][j] = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> c[i][j] = (c[i - <span class="number">1</span>][j] + c[i - <span class="number">1</span>][j - <span class="number">1</span>]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从 $i$ 个数中选取 $j$个 </p>
+<ul>
+<li>选第$i$个数 从前$i-1$ 个中选取$j-1$个数</li>
+<li>不选第$i$ 个数 从前$i-1$个中选取$j$个数</li>
+</ul>
+<hr>
+<p>$O(nlog(mod))$</p>
+<script type="math/tex; mode=display">
+\mathsf{C}_a^b = \frac{a!}{b!(a-b)!}</script><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> N = <span class="number">100010</span>, mod = <span class="number">1000000007</span>;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">int</span>[] fact = <span class="keyword">new</span> <span class="keyword">int</span>[N], infact = <span class="keyword">new</span> <span class="keyword">int</span>[N];</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       fact[<span class="number">0</span>] = infact[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; ++i) &#123;</span><br><span class="line">           fact[i] = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) fact[i - <span class="number">1</span>] * i % mod);</span><br><span class="line">           infact[i] = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) infact[i - <span class="number">1</span>] * qmi(i, mod - <span class="number">2</span>, mod) % mod);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">qmi</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">       <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">           <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">               res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * a % p);</span><br><span class="line">           &#125;</span><br><span class="line">           b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">           a = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) a * a % p);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> res;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line"> <span class="comment">// 求组合数  </span></span><br><span class="line">System.out.println((<span class="keyword">long</span>) fact[a] * infact[b] % mod * infact[a - b] % mod);</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">
+\frac{a}{b} \mod p \neq \frac{a \mod p}{ b \mod p}</script><script type="math/tex; mode=display">
+a * b \mod p = (a \mod p) (b \mod p )</script><hr>
+<p>卢卡斯定理 适合 $p$改变</p>
+<script type="math/tex; mode=display">
+\mathsf{C}_a^b \equiv \mathsf{C}_{a/p}^{b/p} \mathsf{C}_{a \mod p}^{b \mod p } (\mod p)</script><p>只有$a &lt; p $并且 $b &lt; p$ 才可以调用函数$\mathsf{C}$</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">qmi</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (b != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((b &amp; <span class="number">1</span>) != <span class="number">0</span>) &#123;</span><br><span class="line">            res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * a % p);</span><br><span class="line">        &#125;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        a = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) a * a % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">lucas</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; p &amp;&amp; b &lt; p) <span class="keyword">return</span> C(a, b, p);</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>) ((<span class="keyword">long</span>) lucas(a / p, b / p, p) * C(a % p, b % p, p) % p);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b &gt; a) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">long</span> i = <span class="number">1</span>, j = a; i &lt;= b; ++i, --j) &#123;</span><br><span class="line">        res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * j % p);</span><br><span class="line">        res = (<span class="keyword">int</span>) ((<span class="keyword">long</span>) res * qmi(i, p - <span class="number">2</span>, p) % p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p>卡特兰数</p>
+<p><img src="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/Catalan.jpeg" alt="Catalan1"><br><img src="/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/Catalan2.png" alt="Catalan2"></p>
+<script type="math/tex; mode=display">
+\mathsf{C}_{2n}^{n} - \mathsf{C}_{2n}^{n-1} = \frac{\mathsf{C}_{2n}^{n}}{n + 1}</script><p>可以直接写 或者函数$\mathsf{C}$ 或者使用Lucas定理或者上面的方法</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://chu8aa.github.io/2020/02/10/%E7%BB%84%E5%90%88%E6%95%B0/" data-id="ck79zyog000128idp7113f418" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-高斯消元" class="article article-type-post" itemscope itemprop="blogPost">
 
 
@@ -723,64 +796,11 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-
-
-
-  <div class="article-meta">
-    <a href="/2020/01/28/hello-world/" class="article-date">
-  <time datetime="2020-01-28T12:48:59.540Z" itemprop="datePublished">2020-01-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/01/28/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-        
-    </div>
-
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://chu8aa.github.io/2020/01/28/hello-world/" data-id="ck79zyofk00018idpboj39p42" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
   </nav>
 
 </section>
@@ -811,7 +831,7 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 12.5px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 17.5px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 12.5px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 12.5px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 15px;">数据结构</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Leetcode/" style="font-size: 13.33px;">Leetcode</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/hash/" style="font-size: 10px;">hash</a> <a href="/tags/vscode/" style="font-size: 10px;">vscode</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 16.67px;">动态规划</a> <a href="/tags/%E5%91%A8%E8%B5%9B/" style="font-size: 10px;">周赛</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 13.33px;">图论</a> <a href="/tags/%E5%9F%BA%E7%A1%80/" style="font-size: 10px;">基础</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 13.33px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 16.67px;">数据结构</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E6%A0%91/" style="font-size: 10px;">最小树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 10px;">最短路</a>
     </div>
   </div>
 
@@ -833,6 +853,10 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
       <ul>
         
           <li>
+            <a href="/2020/06/18/ST%E8%A1%A8/">st表</a>
+          </li>
+        
+          <li>
             <a href="/2020/06/15/%E7%BA%BF%E6%AE%B5%E6%A0%91/">线段树</a>
           </li>
         
@@ -846,10 +870,6 @@ a \mod b = r =  a - k * b</script><script type="math/tex; mode=display">
         
           <li>
             <a href="/2020/04/23/%E5%AD%97%E5%85%B8%E6%A0%91/">字典树</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/22/Android%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%BA%94%E7%94%A8/">Android第一个应用</a>
           </li>
         
       </ul>
