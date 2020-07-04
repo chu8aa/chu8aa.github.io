@@ -15,7 +15,7 @@
 <meta property="og:description" content="基本 树状数组和线段树虽然非常方便，但维护的信息必须满足信息合并特性（如区间可加，可减），如果不满足此特性则不能使用树状数组和线段树。分块算法可以维护一些线段树维护不了的东西，分块算法就是优化过后的暴力，它可以完成几乎所有区间更新和区间查询问题，但是效率相对于线段树等数据结构要差一些。 分块算法就是将所有数据分成若干块，维护块内信息，使得块内的查询是O(1)的时间，而总的查询时间就可以看成若干块查">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-06-11T02:18:53.000Z">
-<meta property="article:modified_time" content="2020-06-11T03:23:34.184Z">
+<meta property="article:modified_time" content="2020-07-04T13:53:45.906Z">
 <meta property="article:author" content="chu8aa">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -140,7 +140,7 @@
 <h6 id="HDU-5057"><a href="#HDU-5057" class="headerlink" title="HDU 5057"></a>HDU 5057</h6><ul>
 <li>操作<ul>
 <li>一. 求[l, r] 中每个数的第 d 位是 p 的个数</li>
-<li>二. 修改 第 x 位为 y</li>
+<li>二. 修改某个数 第 x 位为 y</li>
 </ul>
 </li>
 <li>维护 block[i][j][k] 第 i 块中第 j 位是 k 的个数</li>
@@ -237,7 +237,7 @@
           </li>
         
           <li>
-            <a href="/2020/06/18/ST%E8%A1%A8/">st表</a>
+            <a href="/2020/06/18/ST%E8%A1%A8/">ST表</a>
           </li>
         
           <li>
@@ -299,5 +299,21 @@
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>

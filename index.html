@@ -135,7 +135,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/18/ST%E8%A1%A8/">st表</a>
+      <a class="article-title" href="/2020/06/18/ST%E8%A1%A8/">ST表</a>
     </h1>
   
 
@@ -163,7 +163,7 @@
 </ul>
 </li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a[i] != a[i - <span class="number">1</span>]) b[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> b[i] = b[i - <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">        f[i][<span class="number">0</span>] = b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(n * <span class="number">1.0</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; k; ++j) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - (<span class="number">1</span> &lt;&lt; j) + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            f[i][j] = <span class="built_in">max</span>(f[i][j - <span class="number">1</span>], f[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(r * <span class="number">1.0</span> - l + <span class="number">1</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(ans, <span class="built_in">max</span>(f[l][k], f[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Initlog</span><span class="params">()</span> <span class="comment">// 可以优化 log 的求法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lb[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;maxn;i++)</span><br><span class="line">        lb[i]=(i&amp;(i<span class="number">-1</span>))?lb[i<span class="number">-1</span>]:lb[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 创建</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        f[i][<span class="number">0</span>] = b[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(n * <span class="number">1.0</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>) + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; k; ++j) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - (<span class="number">1</span> &lt;&lt; j) + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">            f[i][j] = <span class="built_in">max</span>(f[i][j - <span class="number">1</span>], f[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = <span class="built_in">log</span>(r * <span class="number">1.0</span> - l + <span class="number">1</span>) / <span class="built_in">log</span>(<span class="number">2.0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">max</span>(f[l][k], f[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Initlog</span><span class="params">()</span> <span class="comment">// 可以优化 log 的求法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    lb[<span class="number">0</span>]=<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;maxn;i++)</span><br><span class="line">        lb[i]=(i&amp;(i<span class="number">-1</span>))?lb[i<span class="number">-1</span>]:lb[i<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h4><h5 id="POJ3264"><a href="#POJ3264" class="headerlink" title="POJ3264"></a>POJ3264</h5><ul>
 <li>操作<ul>
 <li>[l, r]之间最高的和最低的差值</li>
@@ -310,10 +310,10 @@
 <li>[l, r] 一共几个不同的颜色</li>
 </ul>
 </li>
-<li>其实不用把数据都记录在区间中，只要记录重要的，有些可以通过查询得到的就不用在节点中开辟一段记录空间</li>
-<li>每次查询用一个 ans[] 数组来记录[l, r]中查询到的颜色</li>
-<li>要灵活使用 lazy 有一些可以直接全部区间进行标记。</li>
-<li>查询也不一定要按照一般左边右边，有时候可以根据数据去决定如何查询</li>
+<li>其实不用把数据都记录在区间中，只要记录重要的，有些可以通过查询得到的就不用在节点中开辟一段记录空间。不需要将区间内全部的颜色存下去，只要将这一段的颜色记录下来</li>
+<li>每次查询用一个 ans[] 数组来记录[l, r]中查询到的颜色。</li>
+<li>要灵活使用 lazy 有一些可以直接全部区间进行标记。默认颜色是 1 ，那么就可以用 tree[1].lazy = 1;来标记全部的颜色</li>
+<li>查询也不一定要按照一般左边右边，有时候可以根据数据去决定如何查询.比如当要查询的一段区间在当前区间内，且当前区间全部都被染成一种颜色，可以直接返回不需要pushdown();</li>
 </ul>
 
       
@@ -378,7 +378,7 @@
 <li>直接前驱 一个<ul>
 <li>c[i - lowbit(i)]</li>
 <li>一个点和他的直接后继可能同一个直接前驱 5，6 的直接前驱是 4 ，6 是 5 的直接后继</li>
-<li>大部分是左兄弟</li>
+<li>大部分是左兄弟 也可能是父亲节点的做兄弟</li>
 </ul>
 </li>
 <li>直接后继 一个<ul>
@@ -526,7 +526,7 @@
 <h6 id="HDU-5057"><a href="#HDU-5057" class="headerlink" title="HDU 5057"></a>HDU 5057</h6><ul>
 <li>操作<ul>
 <li>一. 求[l, r] 中每个数的第 d 位是 p 的个数</li>
-<li>二. 修改 第 x 位为 y</li>
+<li>二. 修改某个数 第 x 位为 y</li>
 </ul>
 </li>
 <li>维护 block[i][j][k] 第 i 块中第 j 位是 k 的个数</li>
@@ -937,7 +937,7 @@
           </li>
         
           <li>
-            <a href="/2020/06/18/ST%E8%A1%A8/">st表</a>
+            <a href="/2020/06/18/ST%E8%A1%A8/">ST表</a>
           </li>
         
           <li>
@@ -999,5 +999,21 @@
 
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 </html>
